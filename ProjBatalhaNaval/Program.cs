@@ -2,84 +2,134 @@
 {
     private static void Main(string[] args)
     {
-        char[,] board = new char[20, 20];
+        char[,] campo = new char[20, 20];
+        char[,] campo2 = new char[20, 20];
+        char[] letras = new char[20] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
+        //int LinhaCampo;    // falta letra M no vetor e da erro contagem
+        int colunaCampo = 0;
 
-        FillBoard(); //inicializa a matriz com espaços vazios as coordenadas da matriz
-        PrintBoard();
 
-        void FillBoard()
+        PreenchimentoInicialCampo(campo);
+
+        MostraCampoBatalha(campo);
+
+        //ExibeMatrizPreenchida(campo);
+        colunaCampo = buscarColuna();
+        ColocaNavioNaMAtriz1(campo, colunaCampo);
+
+        MostraCampoBatalha(campo);
+
+
+
+        void MostraCampoBatalha(char[,] matriz)
         {
-            for (int i = 0; i < board.GetLength(0); i++)
-            {
-                for (int j = 0; j < board.GetLength(1); j++)
-                {
-                    board[i, j] = '0';
-                }
-            }
-        }
-
-        void PrintBoard()
-        {
-            char[] letter = new char[20] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
-            int numbers = 1;
-            for (int count = 0; count < board.GetLength(0); count++)
-            {
-                if (count == 0)
-                    Console.Write("     ");
-                Console.Write(letter[count] + "   ");
-            }
+            Console.Write("   A    B    C    D    E    F    G    H");
+            Console.Write("    I    J    K    L    M    N    O    P");
+            Console.Write("    Q    R    S    T "); // vai ate T
             Console.WriteLine();
-            CloseLine();
-            for (int i = 0; i < board.GetLength(0); i++)
+            int contador = 1;
+
+            for (int linha = 1; linha <= 20; linha++)
             {
-                if (numbers < 10)
-                    Console.Write(numbers + " ");
-                else
-                    Console.Write(numbers);
-                numbers++;
-                for (int j = 0; j < board.GetLength(0); j++)
+                //Console.Write(contador + "  ");
+                contador++;
+                for (int coluna = 1; coluna <= 20; coluna++)
                 {
-                    if (j == 0)
-                        Console.Write(" |");
-                    Console.Write(" " + board[i, j] + " ");
-                    if (j < board.Length - 1)
+                    Console.Write(" |_" + campo[linha - 1, coluna - 1] + "_");
+                    if (coluna == 20)
+                    {
                         Console.Write("|");
+                        Console.WriteLine();
+                    }
                 }
+
+            }
+        }
+
+
+
+
+        void ColocaNavioNaMAtriz1(char[,] matriz, int colun) // problema retorno coluna valor alto
+        {
+            Console.Clear();
+            int linhaEscolhida = 1;
+
+            do
+            {
+                // Console.WriteLine("coliuna --> " + colun);//
                 Console.WriteLine();
-                if (i < board.Length - 1)
-                    FillLine();
-            }
-            Console.WriteLine();
+                Console.WriteLine("\tInforme a linha desejada: ");
+                linhaEscolhida = int.Parse(Console.ReadLine());
+
+                if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
+                {
+                    Console.WriteLine(" Valor incorreto. Não existe essa linha!");
+                }
+
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)));
+            matriz[linhaEscolhida - 1, colun] = 'x';
+            Console.ReadKey();
         }
 
-        void FillLine()
+
+        void PreenchimentoInicialCampo(char[,] matriz)
         {
-            int pipe = 0;
-            for (int i = 0; i < (board.GetLength(0) * 3); i++)
+            for (int linha = 0; linha < matriz.GetLength(0); linha++)
             {
-                if (i == 0)
-                    Console.Write("   |");
-                Console.Write('_');
-                pipe++;
-                if (pipe % 3 == 0 && pipe != 0)
-                    Console.Write('|');
+                for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
+                {
+                    campo[linha, coluna] = 'O';
+                }
             }
-            Console.WriteLine();
         }
 
-        void CloseLine()
+        void ExibeMatrizPreenchida(char[,] matriz)
         {
-            int space = 0;
-            for (int i = 0; i < (board.GetLength(0) * 3); i++)
+            for (int linha = 0; linha < matriz.GetLength(0); linha++)
             {
-                if (i == 0)
-                    Console.Write("    ");
-                Console.Write('_');
-                space++;
-                if (space % 3 == 0 && space != 0)
-                    Console.Write(' ');
+                for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
+                {
+                    Console.Write("  " + campo[linha, coluna] + " ");
+                    if (coluna == 19)
+                    {
+                        Console.WriteLine();
+                    }
+                }
             }
-            Console.WriteLine();
         }
+
+
+        int buscarColuna()
+        {
+            int i;
+            char colunaDesejada;
+            string aux;
+            int sla;
+            Console.WriteLine();
+            Console.WriteLine("\tInforme a coluna desejada: ");
+            aux = Console.ReadLine();
+            colunaDesejada = aux[0];
+            //sla = int.Parse(aux[1]);
+
+            for (i = 0; i < letras.Length; i++)
+            {
+                if (letras[i] == Char.ToUpper(colunaDesejada))
+                {
+                    Console.WriteLine(" o indice é: " + i);
+
+                    break;
+                }
+
+            }
+            Console.WriteLine(" A coluna é: " + i);
+            Console.ReadKey();
+            return i;
+
+        }
+
+
+
+
+
     }
 }
