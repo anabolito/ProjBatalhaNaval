@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProjBatalhaNaval
 {
-    internal class PortaAvioes
+    internal class PortaAvioes : Embarcacao
     {
+        int Tamanho = 4;
 
+        public PortaAvioes(int tamanho):base(tamanho)
+        {
+            
+        }
     }
 }

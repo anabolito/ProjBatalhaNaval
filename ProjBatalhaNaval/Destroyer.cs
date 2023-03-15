@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjBatalhaNaval
 {
-    internal class Destroyer
+    internal class Destroyer: Embarcacao
     {
-        public Destroyer()
+        public Destroyer(int tamanho): base(tamanho)
         {
 
         }

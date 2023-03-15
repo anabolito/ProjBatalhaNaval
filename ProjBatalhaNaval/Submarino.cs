@@ -8,7 +8,7 @@ namespace ProjBatalhaNaval
 {
     internal class Submarino : Embarcacao
     {
-        public Submarino()
+        public Submarino(int tamanho): base( tamanho)
         {
 
         }
