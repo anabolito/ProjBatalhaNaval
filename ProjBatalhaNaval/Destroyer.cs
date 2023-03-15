@@ -8,9 +8,9 @@ namespace ProjBatalhaNaval
 {
     internal class Destroyer: Embarcacao
     {
-        public Destroyer(int tamanho): base(tamanho)
+        public Destroyer()
         {
-
+            this.Tamanho = 3;
         }
     }
 }

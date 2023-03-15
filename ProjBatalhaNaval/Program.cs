@@ -4,202 +4,283 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        char[,] campo = new char[20, 20];
+        char[,] campo1 = new char[20, 20];
         char[,] campo2 = new char[20, 20];
         char[] letras = new char[20] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
-        //int LinhaCampo;    // falta letra M no vetor e da erro contagem
         int colunaCampo = 0;
         int posicaoLinha = 0;
-        string? jogador1= "PLAYER 1";
-        string? jogador2= "PLAYER 2";
-        string jogadorAtual = jogador1;
-        bool acertou = false; // vai verificar se acertou o tiro ou nao
+
+        bool acertou = false;
+
+
+        Jogador jogador1 = new();
+        char orientacaoJogador = jogador1.RetornarOrientacao();
+        PortaAvioes portaAviao1 = new();
+        portaAviao1.Alinhamento = orientacaoJogador;
+
+
+      //  --------------------------------// NAO APAGAR//-------------------------------
+        // Jogador jogador2 = new();
+        //Jogador jogadorAtual = new();
+       // jogadorAtual.Nome = jogador1.Nome;
+
+        //string retornoDisparo = jogador1.Disparar();
+       // char coordenadaDisparoColuna = retornoDisparo[0];
+       // string coordenadaDisparoLinha = retornoDisparo.Substring(1); // DEU CERTO!!
+
+       // Console.WriteLine("O retorno do disparo foi: " + retornoDisparo);
+       // Console.WriteLine(" A coordenada da coluna foi: " + coordenadaDisparoColuna);
+       // Console.WriteLine(" A coordenada da linha foi: " + coordenadaDisparoLinha);
+
+        //  int numeroColunaTiro = buscarColuna(coordenadaDisparoColuna); // chama o metodo e passa a letra
 
 
 
-        Submarino submarino1 = new Submarino(2);
-        submarino1.Disparar();  //  usa o metodo Dispara da classe! RETORNA UMA STRING
-        // com a String retornada pegaria o primeiro caractere para coordenada da COLUNA e o outro para LINHA
-       // e com essas 2 coordenadas acharia o alvo para o disparo!!!   
 
-            PreenchimentoInicialCampo(campo);
+        PreenchimentoInicialCampo(campo1);
 
-            MostraCampoBatalha(campo);
+        MostraCampoBatalha(campo1);
 
-            //ExibeMatrizPreenchida(campo);
-            colunaCampo = buscarColuna();
-            ColocaNavioNaMAtriz1(campo, colunaCampo);
+        Console.WriteLine("Informe a coluna que deseja colocar   seu navio: ");
+        char capturaResposta = Console.ReadKey(true).KeyChar;
+        colunaCampo = TransformaLetraDaColunaEmNumero(capturaResposta);
+        ColocaNavioNaMAtriz(campo1, colunaCampo, portaAviao1);
 
-            MostraCampoBatalha(campo);
+        MostraCampoBatalha(campo1);
 
 
 
-            void MostraCampoBatalha(char[,] matriz)
+
+        //--------------------- O JOGADOR ATIRA!! É METODO  DO OBJETO JOGADOR!
+        // --- BARCO TERIA METODO afunda() ... atingido()  etc.. bool verificarDestruido()
+        //OBJETO TABULEIRO...verifica  se " de uagua" ou acertou" -- objeto tabuleiro retorna se tiro foi na agua  ou acertou
+        // usuario passa posicao para o objeto tabuleiro!!!
+        //tabuleiro retorna true se acertou algo..e false se deu agua
+
+        // minha ideia: objeto jogador chama o tabuleiro  e passa  as coordenadas!!
+
+
+
+
+
+
+
+        void MostraCampoBatalha(char[,] matriz)
+        {
+            Console.Write("   A    B    C    D    E    F    G    H");
+            Console.Write("    I    J    K    L    M    N    O    P");
+            Console.Write("    Q    R    S    T ");
+            Console.WriteLine();
+            int contador = 1;
+
+            for (int linha = 1; linha <= 20; linha++)
             {
-                Console.Write("   A    B    C    D    E    F    G    H");
-                Console.Write("    I    J    K    L    M    N    O    P");
-                Console.Write("    Q    R    S    T "); // vai ate T
-                Console.WriteLine();
-                int contador = 1;
 
-                for (int linha = 1; linha <= 20; linha++)
+                contador++;
+                for (int coluna = 1; coluna <= 20; coluna++)
                 {
-                    //Console.Write(contador + "  ");
-                    contador++;
-                    for (int coluna = 1; coluna <= 20; coluna++)
+
+                    Console.Write(" |_" + campo1[linha - 1, coluna - 1] + "_");
+                    if (coluna == 20)
                     {
-                        Console.Write(" |_" + campo[linha - 1, coluna - 1] + "_");
-                        if (coluna == 20)
-                        {
-                            Console.Write("|");
-                            Console.WriteLine();
-                        }
+                        Console.Write("|");
+                        Console.WriteLine();
+                    }
+                }
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+        int TransformaLetraDaColunaEmNumero(char letraInformada)
+        {
+            int contador;
+            char colunaDesejada;
+            string aux;
+            bool letraEncontrada = false;
+
+            do
+            {
+
+                for (contador = 0; contador < letras.Length; contador++)
+                {
+                    if (letras[contador] == Char.ToUpper(letraInformada))
+                    {
+                        letraEncontrada = true;
+                        break;
                     }
 
                 }
-            }
-
-
-
-
-            void ColocaNavioNaMAtriz1(char[,] matriz, int colun) 
-            {
-                Console.Clear();
-                //int linhaEscolhida = 1;
-                int linhaEscolhida;
-                string resposta;
-                do
+                if (letraEncontrada = false)
                 {
+                    Console.WriteLine("Coluna não encontrada!");
+                }
+                else
+                {
+                    Console.WriteLine(" A coluna é: " + contador);
+                    Console.ReadKey();
+                }
 
-                    Console.WriteLine();
-                    Console.WriteLine("\tInforme a linha desejada: ");
-                    //linhaEscolhida = int.Parse(Console.ReadLine());
-                    resposta = Console.ReadLine();
-                    if (!int.TryParse(resposta, out linhaEscolhida))
-                    {
-                        Console.WriteLine("Digite APENAS numeros ( ente 1 e 20)!!!");
-                        Console.WriteLine("Tecle para continuar....");
-                        //Console.ReadKey();
-                        Console.Clear();
-                        MostraCampoBatalha(campo);
-                    }
+                return contador;
+                //esta retornando 20 pa qq letra q nao exista!!!   CONSERTAR
 
-                    if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
-                    {
-                        Console.Clear();
-                        MostraCampoBatalha(campo);
-                        Console.WriteLine(" Valor incorreto. Não existe essa linha!");
-                        // Console.Clear();
-                        // MostraCampoBatalha(campo);
-                    }
 
-                } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)));
-                matriz[linhaEscolhida - 1, colun] = 'x';
-                Console.ReadKey();
-            }
+            } while (letraEncontrada = false);
+        }
 
 
 
-
-        //--------------------------------- dispara no alvo -----------------------------//
-        //usaria a mesma logica da funcao ColocaNavioNaMatriz()
-        void RealizaDisparo(char[,] matriz, int colun) // problema retorno coluna valor alto
+        void ColocaNavioNaMAtriz(char[,] matriz, int colun, Embarcacao navio)
         {
-            Console.Clear();
-            //int linhaEscolhida = 1;
+            //Console.Clear();
+
             int linhaEscolhida;
             string resposta;
             do
             {
 
                 Console.WriteLine();
-                Console.WriteLine("\tInforme a linha que deseja atirar: ");
+                Console.WriteLine("\tInforme a linha desejada: ");
                 //linhaEscolhida = int.Parse(Console.ReadLine());
                 resposta = Console.ReadLine();
-                if (!int.TryParse(resposta, out linhaEscolhida)) // TRATA ENTRADA DE CARACTERE INVALIDO!!
+                if (!int.TryParse(resposta, out linhaEscolhida))
                 {
                     Console.WriteLine("Digite APENAS numeros ( ente 1 e 20)!!!");
                     Console.WriteLine("Tecle para continuar....");
                     //Console.ReadKey();
                     Console.Clear();
-                    MostraCampoBatalha(campo);
+                    MostraCampoBatalha(campo1);
                 }
 
                 if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
                 {
                     Console.Clear();
-                    MostraCampoBatalha(campo);
+                    MostraCampoBatalha(campo1);
                     Console.WriteLine(" Valor incorreto. Não existe essa linha!");
                     // Console.Clear();
                     // MostraCampoBatalha(campo);
                 }
 
             } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)));
-            matriz[linhaEscolhida - 1, colun] = 'x';
-            Console.ReadKey();
+            matriz[linhaEscolhida - 1, colun] = 'X'; // insere valor
+
+            int contadorPosicoesNavio = navio.Tamanho - 1;
+
+            if (navio.Alinhamento == 'V')
+            {
+                contadorPosicoesNavio = navio.Tamanho - 1;
+
+                do
+                {
+                    if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] != '~')
+                    {
+                        matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] = 'X';
+                        contadorPosicoesNavio--;
+                    }
+                    else
+                    {
+                        Console.WriteLine(" Escolha outra posicao!");
+                    }
+
+
+
+
+
+                } while (contadorPosicoesNavio > 0);
+            }
+            contadorPosicoesNavio = navio.Tamanho - 1;
+
+            if (navio.Alinhamento == 'H')
+            {
+                
+
+                do
+                {
+
+
+                    Console.Read();
+                    matriz[(linhaEscolhida - 1),  colun + contadorPosicoesNavio] = 'X';
+                    contadorPosicoesNavio--;
+
+
+                } while (contadorPosicoesNavio > 0);
+
+
+            }
+
         }
 
 
 
 
         void PreenchimentoInicialCampo(char[,] matriz)
+        {
+            for (int linha = 0; linha < matriz.GetLength(0); linha++)
             {
-                for (int linha = 0; linha < matriz.GetLength(0); linha++)
+                for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
                 {
-                    for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
+                    campo1[linha, coluna] = '~';
+                }
+            }
+        }
+
+        void ExibeMatrizPreenchida(char[,] matriz)
+        {
+            for (int linha = 0; linha < matriz.GetLength(0); linha++)
+            {
+                for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
+                {
+                    Console.Write("  " + campo1[linha, coluna] + " ");
+                    if (coluna == 19)
                     {
-                        campo[linha, coluna] = 'O';
+                        Console.WriteLine();
                     }
                 }
             }
-
-            void ExibeMatrizPreenchida(char[,] matriz)
-            {
-                for (int linha = 0; linha < matriz.GetLength(0); linha++)
-                {
-                    for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
-                    {
-                        Console.Write("  " + campo[linha, coluna] + " ");
-                        if (coluna == 19)
-                        {
-                            Console.WriteLine();
-                        }
-                    }
-                }
-            }
+        }
+        //alterar para passar  a letra da coluna por parametro!!
+        // tratar possiveis entradas incorretas !!!
 
 
+        /*
             int buscarColuna()
             {
-                int i;
+                int contador;
                 char colunaDesejada;
                 string aux;
-                int sla;
+
                 Console.WriteLine();
                 Console.WriteLine("\tInforme a coluna desejada: ");
                 aux = Console.ReadLine();
-                colunaDesejada = aux[0];
-                //sla = int.Parse(aux[1]);
+                colunaDesejada = aux[0];                
 
-                for (i = 0; i < letras.Length; i++)
+                for (contador = 0; contador < letras.Length; contador++)
                 {
-                    if (letras[i] == Char.ToUpper(colunaDesejada))
+                    if (letras[contador] == Char.ToUpper(colunaDesejada))
                     {
-                        Console.WriteLine(" o indice é: " + i);
+                        Console.WriteLine(" o indice é: " + contador);
 
                         break;
                     }
 
                 }
-                Console.WriteLine(" A coluna é: " + i);
+                Console.WriteLine(" A coluna é: " + contador);
                 Console.ReadKey();
-                return i;
+                return contador;
 
             }
 
 
-        
+        */
 
 
     }
 }
+
