@@ -140,7 +140,7 @@ internal class Program
 
         void MostrarCampoDeBatalha(char[,] matriz)
         {
-            Console.BackgroundColor = ConsoleColor.DarkGray;
+           // Console.BackgroundColor = ConsoleColor.DarkGray;
 
             Console.Write("        A    B    C    D    E    F    G    H");
             Console.Write("    I    J    K    L    M    N    O    P");
