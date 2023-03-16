@@ -41,7 +41,7 @@ internal class Program
 
         MostraCampoBatalha(campo1);
 
-        Console.WriteLine("Informe a coluna que deseja colocar   seu navio: ");
+        Console.WriteLine("\nInforme a coluna que deseja colocar   seu navio: ");
         char capturaResposta = Console.ReadKey(true).KeyChar;
         colunaCampo = TransformaLetraDaColunaEmNumero(capturaResposta);
         ColocaNavioNaMAtriz(campo1, colunaCampo, portaAviao1);
@@ -122,11 +122,11 @@ internal class Program
                 {
                     Console.WriteLine("Coluna não encontrada!");
                 }
-                else
+                /*else
                 {
                     Console.WriteLine(" A coluna é: " + contador);
                     Console.ReadKey();
-                }
+                }*/
 
                 return contador;
                 //esta retornando 20 pa qq letra q nao exista!!!   CONSERTAR
@@ -147,7 +147,7 @@ internal class Program
             {
 
                 Console.WriteLine();
-                Console.WriteLine("\tInforme a linha desejada: ");
+                Console.Write("\tInforme a linha desejada: ");
                 //linhaEscolhida = int.Parse(Console.ReadLine());
                 resposta = Console.ReadLine();
                 if (!int.TryParse(resposta, out linhaEscolhida))
@@ -179,7 +179,7 @@ internal class Program
 
                 do
                 {
-                    if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] != '~')
+                    if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] == '~')
                     {
                         matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] = 'X';
                         contadorPosicoesNavio--;
