@@ -1,4 +1,7 @@
-﻿using ProjBatalhaNaval;
+﻿using System;
+using System.Drawing;
+using System.Reflection;
+using ProjBatalhaNaval;
 
 internal class Program
 {
@@ -6,47 +9,114 @@ internal class Program
     {
         char[,] campo1 = new char[20, 20];
         char[,] campo2 = new char[20, 20];
+        char[,] campoJogadorAtual;
         char[] letras = new char[20] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
         int colunaCampo = 0;
         int posicaoLinha = 0;
-
         bool acertou = false;
-
-
-        Jogador jogador1 = new();
-        char orientacaoJogador = jogador1.RetornarOrientacao();
-        PortaAvioes portaAviao1 = new();
-        portaAviao1.Alinhamento = orientacaoJogador;
-
-
-      //  --------------------------------// NAO APAGAR//-------------------------------
-        // Jogador jogador2 = new();
-        //Jogador jogadorAtual = new();
-       // jogadorAtual.Nome = jogador1.Nome;
-
-        //string retornoDisparo = jogador1.Disparar();
-       // char coordenadaDisparoColuna = retornoDisparo[0];
-       // string coordenadaDisparoLinha = retornoDisparo.Substring(1); // DEU CERTO!!
-
-       // Console.WriteLine("O retorno do disparo foi: " + retornoDisparo);
-       // Console.WriteLine(" A coordenada da coluna foi: " + coordenadaDisparoColuna);
-       // Console.WriteLine(" A coordenada da linha foi: " + coordenadaDisparoLinha);
-
-        //  int numeroColunaTiro = buscarColuna(coordenadaDisparoColuna); // chama o metodo e passa a letra
-
-
+        bool fimPartida = false;
+        Jogador jogadorAtual;
 
 
         PreenchimentoInicialCampo(campo1);
+        PreenchimentoInicialCampo(campo2);
 
-        MostraCampoBatalha(campo1);
 
-        Console.WriteLine("Informe a coluna que deseja colocar   seu navio: ");
-        char capturaResposta = Console.ReadKey(true).KeyChar;
-        colunaCampo = TransformaLetraDaColunaEmNumero(capturaResposta);
-        ColocaNavioNaMAtriz(campo1, colunaCampo, portaAviao1);
+        campoJogadorAtual = campo1; //  define valor inicial do jogadorAtual
 
-        MostraCampoBatalha(campo1);
+        
+
+        // -- CRIAÇÃO DOS JOGADORES--//
+        Jogador jogador1 = new();
+        Jogador jogador2 = new();
+        jogadorAtual = jogador1;         // JOGADORATUAL COMEÇA COMO JOGADOR1
+
+
+        // -- CRIAÇÃO DAS EMBARCAÇÕES--
+        PortaAvioes portaAviao1 = new();
+        PortaAvioes portaAviao2 = new();
+
+        Destroyer destroyer1 = new();
+        Destroyer destroyer2 = new();
+
+        Submarino submarino1 = new();
+        Submarino submarino2 = new();
+
+
+        
+
+       
+
+
+        Embarcacao embarcacaoAtual = submarino1; //.................. DEU CERTO!
+       // Console.WriteLine("tamanho do navio : " + navio.Tamanho);
+       
+
+
+
+
+        //----- DEFINE ALTERNÂNCIA ENTRE OS JOGADORES ---//
+        if (jogadorAtual == jogador1)
+        {
+            campoJogadorAtual = campo1;
+        }
+        else if (jogadorAtual == jogador2)
+        {
+            campoJogadorAtual = campo2;
+        }
+
+      
+
+        do
+        {       
+            
+            MostrarCampoDeBatalha(campoJogadorAtual);
+            
+            char orientacaoJogador = jogadorAtual.RetornarOrientacao();
+            portaAviao1.Alinhamento = orientacaoJogador;
+
+            colunaCampo = TransformaLetraDaColunaEmNumero();
+            ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, portaAviao1);
+
+            MostrarCampoDeBatalha(campoJogadorAtual);
+
+            orientacaoJogador = jogadorAtual.RetornarOrientacao();
+            submarino1.Alinhamento = orientacaoJogador;
+
+            colunaCampo = TransformaLetraDaColunaEmNumero();
+            ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino1);
+
+            MostrarCampoDeBatalha(campoJogadorAtual);
+
+            orientacaoJogador = jogadorAtual.RetornarOrientacao();
+            destroyer1.Alinhamento = orientacaoJogador;
+
+            colunaCampo = TransformaLetraDaColunaEmNumero();
+            ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
+            MostrarCampoDeBatalha(campoJogadorAtual);
+
+            
+
+
+
+            fimPartida = true; // apenas para teste
+
+
+
+        } while (fimPartida == false);
+
+
+
+
+        //  --------------------------------// NAO APAGAR//-------------------------------
+       
+
+        //string retornoDisparo = jogador1.Disparar();
+        // char coordenadaDisparoColuna = retornoDisparo[0];
+        // string coordenadaDisparoLinha = retornoDisparo.Substring(1); // DEU CERTO!! !!!
+
+
+       
 
 
 
@@ -65,9 +135,14 @@ internal class Program
 
 
 
-        void MostraCampoBatalha(char[,] matriz)
+
+
+
+        void MostrarCampoDeBatalha(char[,] matriz)
         {
-            Console.Write("   A    B    C    D    E    F    G    H");
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+
+            Console.Write("        A    B    C    D    E    F    G    H");
             Console.Write("    I    J    K    L    M    N    O    P");
             Console.Write("    Q    R    S    T ");
             Console.WriteLine();
@@ -76,100 +151,96 @@ internal class Program
             for (int linha = 1; linha <= 20; linha++)
             {
 
-                contador++;
+                //contador++;
+                Console.Write("  " + contador.ToString("d2") + " ");
                 for (int coluna = 1; coluna <= 20; coluna++)
                 {
 
-                    Console.Write(" |_" + campo1[linha - 1, coluna - 1] + "_");
+                    Console.Write(" |_" + matriz[linha - 1, coluna - 1] + "_");
                     if (coluna == 20)
                     {
-                        Console.Write("|");
+                        Console.Write(" |");
                         Console.WriteLine();
+                        contador++;
                     }
                 }
 
             }
+            Console.ResetColor();
+            
         }
 
 
 
 
-
-
-
-
-
-        int TransformaLetraDaColunaEmNumero(char letraInformada)
-        {
-            int contador;
+        int TransformaLetraDaColunaEmNumero()
+        {  
+            
             char colunaDesejada;
-            string aux;
-            bool letraEncontrada = false;
+            char letraColuna;            
+            string todasLetras = "ABCDEFGHIJKLMNOPQRST";
+            int index = -1;
 
+           
+            
             do
             {
+                
 
-                for (contador = 0; contador < letras.Length; contador++)
+                Console.WriteLine("Informe a coluna para colocar a embarcação: ");
+                letraColuna = Console.ReadKey(true).KeyChar;
+                colunaDesejada = char.ToUpper(letraColuna);
+                index = todasLetras.IndexOf(colunaDesejada);
+                
+                if ( index < 0)
                 {
-                    if (letras[contador] == Char.ToUpper(letraInformada))
-                    {
-                        letraEncontrada = true;
-                        break;
-                    }
-
-                }
-                if (letraEncontrada = false)
-                {
-                    Console.WriteLine("Coluna não encontrada!");
-                }
-                else
-                {
-                    Console.WriteLine(" A coluna é: " + contador);
-                    Console.ReadKey();
+                    Console.WriteLine("Coluna informada não foi localizada. Informe a coluna novamente!");
+                    Console.ReadLine();
+                    
+                    Console.Clear();
+                    MostrarCampoDeBatalha(campoJogadorAtual);
                 }
 
-                return contador;
-                //esta retornando 20 pa qq letra q nao exista!!!   CONSERTAR
-
-
-            } while (letraEncontrada = false);
+            } while (index < 0);
+            return index; 
         }
 
 
 
-        void ColocaNavioNaMAtriz(char[,] matriz, int colun, Embarcacao navio)
+
+        void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
-            //Console.Clear();
 
             int linhaEscolhida;
             string resposta;
+
             do
             {
 
-                Console.WriteLine();
+                
                 Console.WriteLine("\tInforme a linha desejada: ");
-                //linhaEscolhida = int.Parse(Console.ReadLine());
                 resposta = Console.ReadLine();
                 if (!int.TryParse(resposta, out linhaEscolhida))
                 {
                     Console.WriteLine("Digite APENAS numeros ( ente 1 e 20)!!!");
                     Console.WriteLine("Tecle para continuar....");
-                    //Console.ReadKey();
                     Console.Clear();
-                    MostraCampoBatalha(campo1);
+                    MostrarCampoDeBatalha(campoJogadorAtual);
                 }
 
                 if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
                 {
                     Console.Clear();
-                    MostraCampoBatalha(campo1);
+                    MostrarCampoDeBatalha(campoJogadorAtual);
                     Console.WriteLine(" Valor incorreto. Não existe essa linha!");
-                    // Console.Clear();
-                    // MostraCampoBatalha(campo);
+
                 }
 
             } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)));
-            matriz[linhaEscolhida - 1, colun] = 'X'; // insere valor
+
+
+            matriz[linhaEscolhida - 1, colun] = 'X';
+
 
             int contadorPosicoesNavio = navio.Tamanho - 1;
 
@@ -179,18 +250,23 @@ internal class Program
 
                 do
                 {
-                    if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] != '~')
+                    if (((linhaEscolhida - 1) + contadorPosicoesNavio) <= matriz.GetLength(0))
                     {
-                        matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] = 'X';
-                        contadorPosicoesNavio--;
+                        if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] == '~')
+                        {
+                            matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] = 'X';
+                            contadorPosicoesNavio--;
+                        }
+                        else
+                        {
+                            Console.WriteLine(" Escolha outra posicao!");
+                            break;
+                        }
                     }
                     else
                     {
-                        Console.WriteLine(" Escolha outra posicao!");
+
                     }
-
-
-
 
 
                 } while (contadorPosicoesNavio > 0);
@@ -199,14 +275,14 @@ internal class Program
 
             if (navio.Alinhamento == 'H')
             {
-                
+
 
                 do
                 {
 
 
                     Console.Read();
-                    matriz[(linhaEscolhida - 1),  colun + contadorPosicoesNavio] = 'X';
+                    matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
 
 
@@ -226,59 +302,40 @@ internal class Program
             {
                 for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
                 {
-                    campo1[linha, coluna] = '~';
+                    matriz[linha, coluna] = '~';
                 }
             }
         }
+
+
 
         void ExibeMatrizPreenchida(char[,] matriz)
         {
-            for (int linha = 0; linha < matriz.GetLength(0); linha++)
+            Console.Write("        A   B   C   D   E   F   G   H");
+            Console.Write("   I   J   K   L   M   N   O   P");
+            Console.Write("   Q   R   S   T ");
+            Console.WriteLine();
+            int contador = 1;
+
+            for (int linha = 1; linha <= 20; linha++)
             {
-                for (int coluna = 0; coluna < matriz.GetLength(1); coluna++)
+
+                //contador++;
+                Console.Write("  " + contador.ToString("d2") + " ");
+                for (int coluna = 1; coluna <= 20; coluna++)
                 {
-                    Console.Write("  " + campo1[linha, coluna] + " ");
-                    if (coluna == 19)
+
+                    Console.Write(" |_" + matriz[linha - 1, coluna - 1] + "_");
+                    if (coluna == 20)
                     {
+                        Console.Write(" |");
                         Console.WriteLine();
+                        contador++;
                     }
                 }
+
             }
         }
-        //alterar para passar  a letra da coluna por parametro!!
-        // tratar possiveis entradas incorretas !!!
-
-
-        /*
-            int buscarColuna()
-            {
-                int contador;
-                char colunaDesejada;
-                string aux;
-
-                Console.WriteLine();
-                Console.WriteLine("\tInforme a coluna desejada: ");
-                aux = Console.ReadLine();
-                colunaDesejada = aux[0];                
-
-                for (contador = 0; contador < letras.Length; contador++)
-                {
-                    if (letras[contador] == Char.ToUpper(colunaDesejada))
-                    {
-                        Console.WriteLine(" o indice é: " + contador);
-
-                        break;
-                    }
-
-                }
-                Console.WriteLine(" A coluna é: " + contador);
-                Console.ReadKey();
-                return contador;
-
-            }
-
-
-        */
 
 
     }
