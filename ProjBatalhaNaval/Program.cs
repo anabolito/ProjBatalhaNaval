@@ -24,7 +24,7 @@ internal class Program
 
         campoJogadorAtual = campo1; //  define valor inicial do jogadorAtual
 
-        
+
 
         // -- CRIAÇÃO DOS JOGADORES--//
         Jogador jogador1 = new();
@@ -43,14 +43,14 @@ internal class Program
         Submarino submarino2 = new();
 
 
-        
 
-       
+
+
 
 
         Embarcacao embarcacaoAtual = submarino1; //.................. DEU CERTO!
-       // Console.WriteLine("tamanho do navio : " + navio.Tamanho);
-       
+                                                 // Console.WriteLine("tamanho do navio : " + navio.Tamanho);
+
 
 
 
@@ -65,13 +65,13 @@ internal class Program
             campoJogadorAtual = campo2;
         }
 
-      
+
 
         do
-        {       
-            
+        {
+
             MostrarCampoDeBatalha(campoJogadorAtual);
-            
+
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao1.Alinhamento = orientacaoJogador;
 
@@ -95,7 +95,7 @@ internal class Program
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
             MostrarCampoDeBatalha(campoJogadorAtual);
 
-            
+
 
 
 
@@ -109,14 +109,14 @@ internal class Program
 
 
         //  --------------------------------// NAO APAGAR//-------------------------------
-       
+
 
         //string retornoDisparo = jogador1.Disparar();
         // char coordenadaDisparoColuna = retornoDisparo[0];
         // string coordenadaDisparoLinha = retornoDisparo.Substring(1); // DEU CERTO!! !!!
 
 
-       
+
 
 
 
@@ -140,7 +140,7 @@ internal class Program
 
         void MostrarCampoDeBatalha(char[,] matriz)
         {
-           // Console.BackgroundColor = ConsoleColor.DarkGray;
+            // Console.BackgroundColor = ConsoleColor.DarkGray;
 
             Console.Write("        A    B    C    D    E    F    G    H");
             Console.Write("    I    J    K    L    M    N    O    P");
@@ -167,42 +167,42 @@ internal class Program
 
             }
             Console.ResetColor();
-            
+
         }
 
 
 
 
         int TransformaLetraDaColunaEmNumero()
-        {  
-            
+        {
+
             char colunaDesejada;
-            char letraColuna;            
+            char letraColuna;
             string todasLetras = "ABCDEFGHIJKLMNOPQRST";
             int index = -1;
 
-           
-            
+
+
             do
             {
-                
+
 
                 Console.WriteLine("Informe a coluna para colocar a embarcação: ");
                 letraColuna = Console.ReadKey(true).KeyChar;
                 colunaDesejada = char.ToUpper(letraColuna);
                 index = todasLetras.IndexOf(colunaDesejada);
-                
-                if ( index < 0)
+
+                if (index < 0)
                 {
                     Console.WriteLine("Coluna informada não foi localizada. Informe a coluna novamente!");
                     Console.ReadLine();
-                    
+
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
                 }
 
             } while (index < 0);
-            return index; 
+            return index;
         }
 
 
@@ -212,15 +212,30 @@ internal class Program
         {
 
             int linhaEscolhida;
-            string resposta;
+            int contadorPosicoesNavio = navio.Tamanho - 1;
+            bool naoCabe = false;  //new
 
             do
             {
 
-                
                 Console.WriteLine("\tInforme a linha desejada: ");
-                resposta = Console.ReadLine();
-                if (!int.TryParse(resposta, out linhaEscolhida))
+                
+               linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
+
+                //new
+                for (contadorPosicoesNavio = navio.Tamanho - 1; contadorPosicoesNavio > 0; contadorPosicoesNavio--) //new
+                {
+                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio , colun] == 'X')  //new
+                    {
+                        naoCabe = true;
+                        return;//new
+                    }
+                }
+
+
+                if ((linhaEscolhida != 1) && (linhaEscolhida != 2) && (linhaEscolhida != 3) && (linhaEscolhida != 4) && (linhaEscolhida != 5) && (linhaEscolhida != 6) && (linhaEscolhida != 7) &&
+                    (linhaEscolhida != 8) && (linhaEscolhida != 9) && (linhaEscolhida != 10) && (linhaEscolhida != 11) && (linhaEscolhida != 12) && (linhaEscolhida != 13) && (linhaEscolhida != 14) &&
+                    (linhaEscolhida != 15) && (linhaEscolhida != 16) && (linhaEscolhida != 17) && (linhaEscolhida != 18) && (linhaEscolhida != 19) && (linhaEscolhida != 20))
                 {
                     Console.WriteLine("Digite APENAS numeros ( ente 1 e 20)!!!");
                     Console.WriteLine("Tecle para continuar....");
@@ -236,13 +251,13 @@ internal class Program
 
                 }
 
-            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)));
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)) || naoCabe == true);  // naoCabe é novo
 
 
             matriz[linhaEscolhida - 1, colun] = 'X';
 
 
-            int contadorPosicoesNavio = navio.Tamanho - 1;
+
 
             if (navio.Alinhamento == 'V')
             {

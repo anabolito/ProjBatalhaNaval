@@ -103,6 +103,10 @@ namespace ProjBatalhaNaval
 
                 Console.WriteLine("\tInforme a linha desejada: ");
                 resposta = Console.ReadLine();
+                linhaEscolhida = int.Parse(resposta);
+                if(matriz[linhaEscolhida, colun] == 'X')
+                    Console.WriteLine(" Posição já preenchida! Escolha outra.");
+
                 if (!int.TryParse(resposta, out linhaEscolhida))
                 {
                     Console.WriteLine("Digite APENAS numeros ( ente 1 e 20)!!!");
@@ -119,7 +123,7 @@ namespace ProjBatalhaNaval
 
                 }
 
-            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)));
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)) || matriz[linhaEscolhida, colun] == 'X');
 
 
             matriz[linhaEscolhida - 1, colun] = 'X';
@@ -139,17 +143,16 @@ namespace ProjBatalhaNaval
                         {
                             matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] = 'X';
                             contadorPosicoesNavio--;
+                            
                         }
                         else
                         {
-                            Console.WriteLine(" Escolha outra posicao!");
+                            Console.WriteLine(" Escolha outra posição!");
                             break;
+                            
                         }
                     }
-                    else
-                    {
-
-                    }
+                    else{ }
 
 
                 } while (contadorPosicoesNavio > 0);
