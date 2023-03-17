@@ -76,6 +76,8 @@ internal class Program
 
             jogadorAtual = jogador1;
 
+            Console.Write("\nJogador " + jogadorAtual.Nome + ", ");
+
             while (jogadorAtual.Disparar(campoJogadorAtual))
             {
                 jogadorAtual.Disparar(campoJogadorAtual);
@@ -84,6 +86,8 @@ internal class Program
 
             jogadorAtual = jogador2;
             campoJogadorAtual = campo1;
+
+            Console.Write("\nJogador " + jogadorAtual.Nome + ", ");
 
             while (jogadorAtual.Disparar(campoJogadorAtual))
             {
@@ -146,7 +150,6 @@ internal class Program
             MostrarCampoDeBatalha(campoJogadorAtual);
 
             Console.Clear();
-
 
             //------------ COLONA NAVIOS JOGADOR 2---------------------------//
             jogadorAtual = jogador2; // ALTERNA JOGADOR
@@ -270,7 +273,7 @@ internal class Program
 
                 Console.Write("  Informe a linha desejada: ");
 
-                6linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
+                linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
 
 
 

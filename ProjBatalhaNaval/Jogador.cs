@@ -35,25 +35,27 @@ namespace ProjBatalhaNaval
             char colunaAlvo;
             string linhaAlvo;            
             char coluna;
-            
 
-            Console.WriteLine("  Informe a COLUNA que deseja atirar: ");
+
+
+            Console.Clear();
+            Console.Write("\ninforme a COLUNA que deseja atirar: ");
             coluna = char.Parse(Console.ReadLine());
             colunaAlvo = char.ToUpper(coluna);
             int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
 
-            Console.WriteLine("  Informe a LINHA que deseja atirar: ");
+            Console.Write("\ninforme a LINHA que deseja atirar: ");
             linhaAlvo = Console.ReadLine();
             
 
             if (matriz[int.Parse(linhaAlvo)-1, numeroDaColuna] == 'X')
             {
-                Console.WriteLine("  Você acertou 1 posição!");
+                Console.WriteLine("\n  Você acertou 1 posição!");
                 return true;
             }
             else
             {
-                Console.WriteLine("  Você errou o alvo!");
+                Console.WriteLine("\n  Você errou o alvo!");
             }
 
             return false;
