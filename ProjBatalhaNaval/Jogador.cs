@@ -65,9 +65,10 @@ namespace ProjBatalhaNaval
             {
                 Console.Write("\n  Informe a orientação do navio: (V) - VERTICAL | (H) - HORIZONTAL: ");
                  aux = Console.ReadKey(true).KeyChar;
-                orientacao = Char.ToUpper(aux); // alterado
+                orientacao = Char.ToUpper(aux);
+                Console.WriteLine(orientacao);
                 Console.WriteLine();
-                Console.WriteLine();
+                
             } while (orientacao != 'V' && orientacao != 'H');
 
             return orientacao;
