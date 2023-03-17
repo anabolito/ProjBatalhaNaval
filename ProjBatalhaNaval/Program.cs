@@ -49,7 +49,7 @@ internal class Program
 
 
 
-        Embarcacao embarcacaoAtual = submarino1; 
+        Embarcacao embarcacaoAtual = submarino1;
 
 
 
@@ -76,7 +76,7 @@ internal class Program
 
             jogadorAtual = jogador1;
 
-            while(jogadorAtual.Disparar(campoJogadorAtual))
+            while (jogadorAtual.Disparar(campoJogadorAtual))
             {
                 jogadorAtual.Disparar(campoJogadorAtual);
             }
@@ -236,8 +236,8 @@ internal class Program
                 letraColuna = Console.ReadKey(true).KeyChar;
                 colunaDesejada = char.ToUpper(letraColuna);
                 index = todasLetras.IndexOf(colunaDesejada);
-                Console.WriteLine(colunaDesejada); 
-                Console.WriteLine();       
+                Console.WriteLine(colunaDesejada);
+                Console.WriteLine();
 
                 if (index < 0)
                 {
@@ -259,57 +259,49 @@ internal class Program
         void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
 
-            int linhaEscolhida; 
+            int linhaEscolhida;
             int contadorPosicoesNavio = navio.Tamanho - 1;
-            bool valorLinhaValido = false;  //new
-            string aux;
+            bool naoCabe = false;  //new
+
             do
             {
 
 
                 Console.Write("  Informe a linha desejada: ");
-                
-               aux = Console.ReadLine();      /////////////// MUITO PROBLEMA
-                if(!int.TryParse(aux, out linhaEscolhida) )
+
+                linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
+
+
+
+
+                //new
+
+                if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
                 {
-                    Console.WriteLine("\tDigite apenas números de 1 a 20!");
-                    Console.ReadKey();
+                    Console.WriteLine("Posição inválida, escolha novamente.");
+
                 }
 
-                Console.WriteLine(" A linha escolhida foi: " + linhaEscolhida);
-                Console.Read();
 
 
-                
-                    for (contadorPosicoesNavio = navio.Tamanho - 1; contadorPosicoesNavio > 0; contadorPosicoesNavio--) //new
-                    {
-                        if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
-                        {
-                            valorLinhaValido = true;
-                            return;//new
-                        }
-                    }
-                
-
-                if ((linhaEscolhida != 1) && (linhaEscolhida != 2) && (linhaEscolhida != 3) && (linhaEscolhida != 4) && (linhaEscolhida != 5) && (linhaEscolhida != 6) && (linhaEscolhida != 7) &&
-                    (linhaEscolhida != 8) && (linhaEscolhida != 9) && (linhaEscolhida != 10) && (linhaEscolhida != 11) && (linhaEscolhida != 12) && (linhaEscolhida != 13) && (linhaEscolhida != 14) &&
-                    (linhaEscolhida != 15) && (linhaEscolhida != 16) && (linhaEscolhida != 17) && (linhaEscolhida != 18) && (linhaEscolhida != 19) && (linhaEscolhida != 20))
+                /*if (linhaEscolhida<1 || linhaEscolhida>20)
                 {
                     Console.WriteLine("  Digite APENAS números ente 1 e 20!");
                     Console.WriteLine("  Tecle para continuar....");
+                    Console.ReadKey();
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
-                }
+                }*/
 
-                if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
+                /*if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
                 {
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
                     Console.WriteLine("  Valor incorreto. Não existe essa linha!");
 
-                }
+                }*/
 
-            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)) || valorLinhaValido == true);  // valorLinhaValido é novo
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X');  // naoCabe é novo
 
 
             matriz[linhaEscolhida - 1, colun] = 'X';
