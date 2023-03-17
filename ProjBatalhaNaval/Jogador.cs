@@ -23,28 +23,37 @@ namespace ProjBatalhaNaval
 
 
 
-        public string Disparar()
+        public bool Disparar(char[,] matriz)
         {
 
             char colunaAlvo;
-            string linhaAlvo;
-            string alvo;
+            string linhaAlvo;            
             char coluna;
-            int linha;
+            
 
             Console.WriteLine("Informe a COLUNA que deseja atirar: ");
             coluna = char.Parse(Console.ReadLine());
             colunaAlvo = char.ToUpper(coluna);
+            int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
 
             Console.WriteLine("Informe a LINHA que deseja atirar: ");
             linhaAlvo = Console.ReadLine();
-           // linhaAlvo = int.ToUpper(linha);
+            
 
-            string retorno = colunaAlvo  + linhaAlvo;
-            char col = retorno[0];
+            if (matriz[int.Parse(linhaAlvo)-1, numeroDaColuna] == 'X')
+            {
+                Console.WriteLine("acertou");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("errou!!!!");
+            }
 
-            return retorno;
+            return false;
         }
+
+
 
         public char RetornarOrientacao()
         {
@@ -63,7 +72,7 @@ namespace ProjBatalhaNaval
 
 
 
-        int TransformaLetraDaColunaEmNumero()
+        public int TransformaLetraDaColunaEmNumero()
         {
 
             char colunaDesejada;
@@ -89,9 +98,35 @@ namespace ProjBatalhaNaval
         }
 
 
+        public int TransformaLetraDaColunaEmNumero(char letraColuna)
+        {
+
+            char colunaDesejada;
+            //char letraColuna;
+            string todasLetras = "ABCDEFGHIJKLMNOPQRST";
+            int index = -1;
+
+          //  Console.WriteLine("Informe a coluna para colocar a embarcação: ");
+           // letraColuna = Console.ReadKey(true).KeyChar;
+            colunaDesejada = char.ToUpper(letraColuna);
+
+            do
+            {
+                index = todasLetras.IndexOf(colunaDesejada);
+
+                if (index < 0)
+                {
+                    Console.WriteLine("Coluna informada não foi localizada. Informe a coluna novamente!");
+                }
+
+            } while (index < 0);
+            return index;
+        }
 
 
-        void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
+
+
+        public void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
 
             int linhaEscolhida;
@@ -177,38 +212,7 @@ namespace ProjBatalhaNaval
 
             }
 
-            /*
-            int TransformaLetraDaColunaEmNumero()
-            {
-                int contadorLetras;
-                char colunaDesejada;
-                bool letraEncontrada = false;
-
-                Console.WriteLine("Informe a coluna para colocar a embarcação: ");
-                colunaDesejada = Console.ReadKey(true).KeyChar;
-
-                do
-                {
-
-                    for (contadorLetras = 0; contadorLetras < letras.Length; contadorLetras++)
-                    {
-                        if (letras[contadorLetras] == Char.ToUpper(colunaDesejada))
-                        {
-                            letraEncontrada = true;
-                            break;
-
-                        }
-                    }
-
-                    if (!letras.Contains(colunaDesejada))
-                    {
-                        Console.WriteLine("Coluna informada não foi localizada. Informe a coluna novamente!");
-                    }
-
-
-                } while (letraEncontrada = false);
-                return contadorLetras;  // com erro estava retornando 20!!
-            }*/
+          
 
         }
 

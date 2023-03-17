@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Reflection;
+using System.Runtime.Intrinsics.X86;
 using ProjBatalhaNaval;
 
 internal class Program
@@ -48,8 +49,7 @@ internal class Program
 
 
 
-        Embarcacao embarcacaoAtual = submarino1; //.................. DEU CERTO!
-                                                 // Console.WriteLine("tamanho do navio : " + navio.Tamanho);
+        Embarcacao embarcacaoAtual = submarino1; 
 
 
 
@@ -70,6 +70,44 @@ internal class Program
         do
         {
 
+
+            InserirNaviosPorJogador();
+
+
+            jogadorAtual = jogador1;
+
+            while(jogadorAtual.Disparar(campoJogadorAtual))
+            {
+                jogadorAtual.Disparar(campoJogadorAtual);
+            }
+            jogadorAtual.Disparar(campoJogadorAtual); // disparo!!
+
+            jogadorAtual = jogador2;
+            campoJogadorAtual = campo1;
+
+            while (jogadorAtual.Disparar(campoJogadorAtual))
+            {
+                jogadorAtual.Disparar(campoJogadorAtual);
+            }
+            jogadorAtual.Disparar(campoJogadorAtual);
+
+
+
+
+
+
+
+            fimPartida = true; // apenas para teste
+
+
+
+        } while (fimPartida == false);
+
+
+
+
+        void InserirNaviosPorJogador()
+        {
             MostrarCampoDeBatalha(campoJogadorAtual);
 
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
@@ -96,46 +134,34 @@ internal class Program
             MostrarCampoDeBatalha(campoJogadorAtual);
 
 
+            //------------ COLONA NAVIOS JOGADOR 2---------------------------//
+            jogadorAtual = jogador2; // ALTERNA JOGADOR
+            campoJogadorAtual = campo2; // ALTERNA CAMPO
+            Console.WriteLine("JOGADOR " + jogadorAtual.Nome);
+            MostrarCampoDeBatalha(campoJogadorAtual);
+            orientacaoJogador = jogadorAtual.RetornarOrientacao();
+            portaAviao2.Alinhamento = orientacaoJogador;
 
+            colunaCampo = TransformaLetraDaColunaEmNumero();
+            ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, portaAviao2);
 
+            MostrarCampoDeBatalha(campoJogadorAtual);
 
-            fimPartida = true; // apenas para teste
+            orientacaoJogador = jogadorAtual.RetornarOrientacao();
+            submarino2.Alinhamento = orientacaoJogador;
 
+            colunaCampo = TransformaLetraDaColunaEmNumero();
+            ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino2);
 
+            MostrarCampoDeBatalha(campoJogadorAtual);
 
-        } while (fimPartida == false);
+            orientacaoJogador = jogadorAtual.RetornarOrientacao();
+            destroyer2.Alinhamento = orientacaoJogador;
 
-
-
-
-        //  --------------------------------// NAO APAGAR//-------------------------------
-
-
-        //string retornoDisparo = jogador1.Disparar();
-        // char coordenadaDisparoColuna = retornoDisparo[0];
-        // string coordenadaDisparoLinha = retornoDisparo.Substring(1); // DEU CERTO!! !!!
-
-
-
-
-
-
-
-        //--------------------- O JOGADOR ATIRA!! É METODO  DO OBJETO JOGADOR!
-        // --- BARCO TERIA METODO afunda() ... atingido()  etc.. bool verificarDestruido()
-        //OBJETO TABULEIRO...verifica  se " de uagua" ou acertou" -- objeto tabuleiro retorna se tiro foi na agua  ou acertou
-        // usuario passa posicao para o objeto tabuleiro!!!
-        //tabuleiro retorna true se acertou algo..e false se deu agua
-
-        // minha ideia: objeto jogador chama o tabuleiro  e passa  as coordenadas!!
-
-
-
-
-
-
-
-
+            colunaCampo = TransformaLetraDaColunaEmNumero();
+            ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer2);
+            MostrarCampoDeBatalha(campoJogadorAtual);
+        }
 
 
         void MostrarCampoDeBatalha(char[,] matriz)
@@ -182,10 +208,8 @@ internal class Program
             int index = -1;
 
 
-
             do
             {
-
 
                 Console.WriteLine("Informe a coluna para colocar a embarcação: ");
                 letraColuna = Console.ReadKey(true).KeyChar;
@@ -214,13 +238,15 @@ internal class Program
             int linhaEscolhida;
             int contadorPosicoesNavio = navio.Tamanho - 1;
             bool naoCabe = false;  //new
-
+           
             do
             {
 
                 Console.WriteLine("\tInforme a linha desejada: ");
                 
                linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
+                
+
 
                 //new
                 for (contadorPosicoesNavio = navio.Tamanho - 1; contadorPosicoesNavio > 0; contadorPosicoesNavio--) //new
