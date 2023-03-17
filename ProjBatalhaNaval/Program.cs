@@ -110,11 +110,17 @@ internal class Program
         {
             MostrarCampoDeBatalha(campoJogadorAtual);
 
+            Console.WriteLine();
+
+            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome);
+
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao1.Alinhamento = orientacaoJogador;
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, portaAviao1);
+
+            Console.Clear();
 
             MostrarCampoDeBatalha(campoJogadorAtual);
 
@@ -124,6 +130,8 @@ internal class Program
             colunaCampo = TransformaLetraDaColunaEmNumero();
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino1);
 
+            Console.Clear();
+
             MostrarCampoDeBatalha(campoJogadorAtual);
 
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
@@ -131,19 +139,27 @@ internal class Program
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
+
+            Console.Clear();
+
             MostrarCampoDeBatalha(campoJogadorAtual);
+
+            Console.Clear();
 
 
             //------------ COLONA NAVIOS JOGADOR 2---------------------------//
             jogadorAtual = jogador2; // ALTERNA JOGADOR
             campoJogadorAtual = campo2; // ALTERNA CAMPO
-            Console.WriteLine("JOGADOR " + jogadorAtual.Nome);
+            Console.WriteLine();
+            Console.WriteLine("\n  JOGADOR: " + jogadorAtual.Nome);
             MostrarCampoDeBatalha(campoJogadorAtual);
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao2.Alinhamento = orientacaoJogador;
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, portaAviao2);
+
+            Console.Clear();
 
             MostrarCampoDeBatalha(campoJogadorAtual);
 
@@ -153,6 +169,8 @@ internal class Program
             colunaCampo = TransformaLetraDaColunaEmNumero();
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino2);
 
+            Console.Clear();
+
             MostrarCampoDeBatalha(campoJogadorAtual);
 
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
@@ -160,13 +178,16 @@ internal class Program
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer2);
+
+            Console.Clear();
+
             MostrarCampoDeBatalha(campoJogadorAtual);
         }
 
 
         void MostrarCampoDeBatalha(char[,] matriz)
         {
-            // Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Cyan;
 
             Console.Write("        A    B    C    D    E    F    G    H");
             Console.Write("    I    J    K    L    M    N    O    P");
@@ -211,14 +232,15 @@ internal class Program
             do
             {
 
-                Console.WriteLine("Informe a coluna para colocar a embarcação: ");
+                Console.WriteLine("  Informe a coluna para colocar a embarcação: ");
                 letraColuna = Console.ReadKey(true).KeyChar;
                 colunaDesejada = char.ToUpper(letraColuna);
                 index = todasLetras.IndexOf(colunaDesejada);
 
                 if (index < 0)
                 {
-                    Console.WriteLine("Coluna informada não foi localizada. Informe a coluna novamente!");
+                    Console.WriteLine();
+                    Console.WriteLine("  Coluna informada não foi localizada. Informe a coluna novamente!");
                     Console.ReadLine();
 
                     Console.Clear();
@@ -242,7 +264,7 @@ internal class Program
             do
             {
 
-                Console.WriteLine("\tInforme a linha desejada: ");
+                Console.WriteLine("  Informe a linha desejada: ");
                 
                linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
                 
@@ -263,8 +285,8 @@ internal class Program
                     (linhaEscolhida != 8) && (linhaEscolhida != 9) && (linhaEscolhida != 10) && (linhaEscolhida != 11) && (linhaEscolhida != 12) && (linhaEscolhida != 13) && (linhaEscolhida != 14) &&
                     (linhaEscolhida != 15) && (linhaEscolhida != 16) && (linhaEscolhida != 17) && (linhaEscolhida != 18) && (linhaEscolhida != 19) && (linhaEscolhida != 20))
                 {
-                    Console.WriteLine("Digite APENAS numeros ( ente 1 e 20)!!!");
-                    Console.WriteLine("Tecle para continuar....");
+                    Console.WriteLine("  Digite APENAS números ente 1 e 20!");
+                    Console.WriteLine("  Tecle para continuar....");
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
                 }
@@ -273,7 +295,7 @@ internal class Program
                 {
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
-                    Console.WriteLine(" Valor incorreto. Não existe essa linha!");
+                    Console.WriteLine("  Valor incorreto. Não existe essa linha!");
 
                 }
 
@@ -300,7 +322,7 @@ internal class Program
                         }
                         else
                         {
-                            Console.WriteLine(" Escolha outra posicao!");
+                            Console.WriteLine("  Escolha outra posicao!");
                             break;
                         }
                     }

@@ -17,8 +17,10 @@ namespace ProjBatalhaNaval
         {
             numeroDoJogador++;
             Console.WriteLine();
-            Console.Write("\t\t\t\tInforme o nome do jogador"+ numeroDoJogador+": ");
+            Console.Write(" Informe o nome do jogador "+ numeroDoJogador+": ");
             this.Nome = Console.ReadLine();
+            Console.WriteLine();
+            Console.Clear();
         }
 
 
@@ -31,23 +33,23 @@ namespace ProjBatalhaNaval
             char coluna;
             
 
-            Console.WriteLine("Informe a COLUNA que deseja atirar: ");
+            Console.WriteLine("  Informe a COLUNA que deseja atirar: ");
             coluna = char.Parse(Console.ReadLine());
             colunaAlvo = char.ToUpper(coluna);
             int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
 
-            Console.WriteLine("Informe a LINHA que deseja atirar: ");
+            Console.WriteLine("  Informe a LINHA que deseja atirar: ");
             linhaAlvo = Console.ReadLine();
             
 
             if (matriz[int.Parse(linhaAlvo)-1, numeroDaColuna] == 'X')
             {
-                Console.WriteLine("acertou");
+                Console.WriteLine("  Você acertou 1 posição!");
                 return true;
             }
             else
             {
-                Console.WriteLine("errou!!!!");
+                Console.WriteLine("  Você errou o alvo!");
             }
 
             return false;
@@ -61,9 +63,11 @@ namespace ProjBatalhaNaval
             char orientacao;
             do
             {
-                Console.WriteLine(" Informe a orientação do navio: (V) - VERTICAL    (H) - HORIZONTAL");
+                Console.Write("\n  Informe a orientação do navio: (V) - VERTICAL | (H) - HORIZONTAL: ");
                  aux = Console.ReadKey(true).KeyChar;
                 orientacao = Char.ToUpper(aux); // alterado
+                Console.WriteLine();
+                Console.WriteLine();
             } while (orientacao != 'V' && orientacao != 'H');
 
             return orientacao;
@@ -80,7 +84,7 @@ namespace ProjBatalhaNaval
             string todasLetras = "ABCDEFGHIJKLMNOPQRST";
             int index = -1;
 
-            Console.WriteLine("Informe a coluna para colocar a embarcação: ");
+            Console.Write("\n  Informe a coluna para colocar a embarcação: ");
             letraColuna = Console.ReadKey(true).KeyChar;
             colunaDesejada = char.ToUpper(letraColuna);
 
@@ -90,7 +94,8 @@ namespace ProjBatalhaNaval
 
                 if (index < 0)
                 {
-                    Console.WriteLine("Coluna informada não foi localizada. Informe a coluna novamente!");
+                    Console.WriteLine();
+                    Console.WriteLine("  Coluna informada não foi localizada. Informe a coluna novamente!");
                 }
 
             } while (index < 0);
@@ -116,7 +121,8 @@ namespace ProjBatalhaNaval
 
                 if (index < 0)
                 {
-                    Console.WriteLine("Coluna informada não foi localizada. Informe a coluna novamente!");
+                    Console.WriteLine();
+                    Console.WriteLine("  Coluna informada não foi localizada. Informe a coluna novamente!");
                 }
 
             } while (index < 0);
@@ -136,16 +142,16 @@ namespace ProjBatalhaNaval
             {
 
 
-                Console.WriteLine("\tInforme a linha desejada: ");
+                Console.WriteLine("\n  Informe a linha desejada: ");
                 resposta = Console.ReadLine();
                 linhaEscolhida = int.Parse(resposta);
                 if(matriz[linhaEscolhida, colun] == 'X')
-                    Console.WriteLine(" Posição já preenchida! Escolha outra.");
+                    Console.WriteLine("  Posição já preenchida. Escolha outra posição!");
 
                 if (!int.TryParse(resposta, out linhaEscolhida))
                 {
-                    Console.WriteLine("Digite APENAS numeros ( ente 1 e 20)!!!");
-                    Console.WriteLine("Tecle para continuar....");
+                    Console.WriteLine("  Digite APENAS números ente 1 e 20!");
+                    Console.WriteLine("  Tecle para continuar....");
                     Console.Clear();
                    // MostrarCampoDeBatalha(campoJogadorAtual);
                 }
@@ -154,7 +160,7 @@ namespace ProjBatalhaNaval
                 {
                     Console.Clear();
                    // MostrarCampoDeBatalha(campoJogadorAtual);
-                    Console.WriteLine(" Valor incorreto. Não existe essa linha!");
+                    Console.WriteLine("  Valor incorreto. Não existe essa linha!");
 
                 }
 
@@ -182,7 +188,7 @@ namespace ProjBatalhaNaval
                         }
                         else
                         {
-                            Console.WriteLine(" Escolha outra posição!");
+                            Console.WriteLine("  Escolha outra posição!");
                             break;
                             
                         }
