@@ -247,7 +247,7 @@ internal class Program
                 {
                     Console.WriteLine();
                     Console.WriteLine("  Coluna informada não foi localizada. Informe a coluna novamente!");
-                    Thread.Sleep(4000);
+                    Thread.Sleep(2000);
 
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
@@ -263,24 +263,31 @@ internal class Program
         void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
 
+            
+
             int linhaEscolhida;
             int contadorPosicoesNavio = navio.Tamanho - 1;
             bool naoCabe = false;  //new
-
+            string aux;
             do
             {
 
 
                 Console.Write("  Informe a linha desejada: ");
 
-                linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
+                aux = Console.ReadLine();
+                if (!int.TryParse(aux, out linhaEscolhida) || (linhaEscolhida > 20))
+                {
+                    Console.Clear();
+                    MostrarCampoDeBatalha(campoJogadorAtual);
+                    Console.WriteLine("Informe APENAS numeros, entre 1 e 20!");
+                    Thread.Sleep(500); // faz a mensagem ficar por 0.5 segundo !
+                }
 
 
+                    
 
-
-                //new
-
-                if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
+                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
                 {
                     Console.WriteLine("Posição inválida, escolha novamente.");
 

@@ -16,7 +16,7 @@ namespace ProjBatalhaNaval
         
 
         public Jogador()
-        {
+        {   
             this.Nome = "PLAYER " + numeroDoJogador;
             numeroDoJogador++;
             Console.WriteLine();
@@ -38,7 +38,7 @@ namespace ProjBatalhaNaval
 
 
 
-            Console.Clear();
+            
             Console.Write("\ninforme a COLUNA que deseja atirar: ");
             coluna = char.Parse(Console.ReadLine());
             colunaAlvo = char.ToUpper(coluna);
@@ -68,7 +68,7 @@ namespace ProjBatalhaNaval
             char aux;
             char orientacao;
             do
-            {
+            {   
                 Console.Write("\n  Informe a orientação do navio: (V) - VERTICAL | (H) - HORIZONTAL: ");
                  aux = Console.ReadKey(true).KeyChar;
                 orientacao = Char.ToUpper(aux);
