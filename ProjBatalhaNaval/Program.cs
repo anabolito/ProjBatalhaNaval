@@ -347,7 +347,7 @@ internal class Program
                 {
 
 
-                    //Console.Read();
+                    //Console.Read(); PROBLEMA DO ERRO NA LINHA ESCOLHIDA 
                     matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
 
