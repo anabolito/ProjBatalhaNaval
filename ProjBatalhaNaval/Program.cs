@@ -232,10 +232,12 @@ internal class Program
             do
             {
 
-                Console.WriteLine("  Informe a coluna para colocar a embarcação: ");
+                Console.Write("  Informe a coluna para colocar a embarcação: ");
                 letraColuna = Console.ReadKey(true).KeyChar;
                 colunaDesejada = char.ToUpper(letraColuna);
                 index = todasLetras.IndexOf(colunaDesejada);
+                Console.WriteLine(colunaDesejada); 
+                Console.WriteLine();       
 
                 if (index < 0)
                 {
@@ -264,10 +266,12 @@ internal class Program
             do
             {
 
-                Console.WriteLine("  Informe a linha desejada: ");
+
+                Console.Write("  Informe a linha desejada: ");
                 
                linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
-                
+
+              
 
 
                 //new
