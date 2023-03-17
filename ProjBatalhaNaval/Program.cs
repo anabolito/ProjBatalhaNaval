@@ -259,31 +259,37 @@ internal class Program
         void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
 
-            int linhaEscolhida;
+            int linhaEscolhida; 
             int contadorPosicoesNavio = navio.Tamanho - 1;
-            bool naoCabe = false;  //new
-           
+            bool valorLinhaValido = false;  //new
+            string aux;
             do
             {
 
 
                 Console.Write("  Informe a linha desejada: ");
                 
-               linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
-
-              
-
-
-                //new
-                for (contadorPosicoesNavio = navio.Tamanho - 1; contadorPosicoesNavio > 0; contadorPosicoesNavio--) //new
+               aux = Console.ReadLine();      /////////////// MUITO PROBLEMA
+                if(!int.TryParse(aux, out linhaEscolhida) )
                 {
-                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio , colun] == 'X')  //new
-                    {
-                        naoCabe = true;
-                        return;//new
-                    }
+                    Console.WriteLine("\tDigite apenas números de 1 a 20!");
+                    Console.ReadKey();
                 }
 
+                Console.WriteLine(" A linha escolhida foi: " + linhaEscolhida);
+                Console.Read();
+
+
+                
+                    for (contadorPosicoesNavio = navio.Tamanho - 1; contadorPosicoesNavio > 0; contadorPosicoesNavio--) //new
+                    {
+                        if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
+                        {
+                            valorLinhaValido = true;
+                            return;//new
+                        }
+                    }
+                
 
                 if ((linhaEscolhida != 1) && (linhaEscolhida != 2) && (linhaEscolhida != 3) && (linhaEscolhida != 4) && (linhaEscolhida != 5) && (linhaEscolhida != 6) && (linhaEscolhida != 7) &&
                     (linhaEscolhida != 8) && (linhaEscolhida != 9) && (linhaEscolhida != 10) && (linhaEscolhida != 11) && (linhaEscolhida != 12) && (linhaEscolhida != 13) && (linhaEscolhida != 14) &&
@@ -303,7 +309,7 @@ internal class Program
 
                 }
 
-            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)) || naoCabe == true);  // naoCabe é novo
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)) || valorLinhaValido == true);  // valorLinhaValido é novo
 
 
             matriz[linhaEscolhida - 1, colun] = 'X';
