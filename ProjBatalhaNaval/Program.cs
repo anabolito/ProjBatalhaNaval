@@ -55,7 +55,7 @@ internal class Program
 
 
 
-        //----- DEFINE ALTERNÂNCIA ENTRE OS JOGADORES ---//
+        //----- DEFINE ALTERNÂNCIA ENTRE OS JOGADORES ---//   CRIAR METODO QUE FAZ ESSA ALTERNANCIA!!
         if (jogadorAtual == jogador1)
         {
             campoJogadorAtual = campo1;
@@ -243,7 +243,7 @@ internal class Program
                 {
                     Console.WriteLine();
                     Console.WriteLine("  Coluna informada não foi localizada. Informe a coluna novamente!");
-                    Console.ReadLine();
+                    Thread.Sleep(4000);
 
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);

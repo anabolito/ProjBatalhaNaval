@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -12,11 +13,14 @@ namespace ProjBatalhaNaval
         private static int numeroDoJogador = 0;
 
         public string Nome { get; set; }
+        
 
         public Jogador()
         {
+            this.Nome = "PLAYER " + numeroDoJogador;
             numeroDoJogador++;
             Console.WriteLine();
+            
             Console.Write(" Informe o nome do jogador "+ numeroDoJogador+": ");
             this.Nome = Console.ReadLine();
             Console.WriteLine();
