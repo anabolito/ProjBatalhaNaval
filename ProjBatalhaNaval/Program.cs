@@ -138,6 +138,7 @@ internal class Program
             destroyer1.Alinhamento = orientacaoJogador;
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
+            
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
 
             Console.Clear();
@@ -269,7 +270,7 @@ internal class Program
 
                 Console.Write("  Informe a linha desejada: ");
 
-                linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
+                6linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
 
 
 
@@ -346,7 +347,7 @@ internal class Program
                 {
 
 
-                    Console.Read();
+                    //Console.Read();
                     matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
 
