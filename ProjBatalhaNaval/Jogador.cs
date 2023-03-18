@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -33,22 +34,45 @@ namespace ProjBatalhaNaval
         {
 
             char colunaAlvo;
-            string linhaAlvo;            
+            int linhaAlvo;            //era string
             char coluna;
-
-
+            string aux;
+            bool continua = false;
 
             
             Console.Write("\ninforme a COLUNA que deseja atirar: ");
-            coluna = char.Parse(Console.ReadLine());
+            coluna = Console.ReadKey(true).KeyChar; // alterado
             colunaAlvo = char.ToUpper(coluna);
             int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
 
-            Console.Write("\ninforme a LINHA que deseja atirar: ");
-            linhaAlvo = Console.ReadLine();
+
+
+            do
+            {
+                Console.Write("\ninforme a LINHA que deseja atirar: ");
+                aux = Console.ReadLine();
+
+
+                //aux = Console.ReadLine();
+                if (!int.TryParse(aux, out linhaAlvo))
+                {
+                    Console.WriteLine("Informe APENAS numeros, entre 1 e 20!");
+                    Thread.Sleep(450); // faz a mensagem ficar por 0.45 segundo !
+                }
+                else
+                {
+                    continua = true;
+                }
+
+            } while (continua == false);
+
             
 
-            if (matriz[int.Parse(linhaAlvo)-1, numeroDaColuna] == 'X')
+
+
+
+
+            if (matriz[(linhaAlvo)-1, numeroDaColuna] == 'X')
             {
                 Console.WriteLine("\n  Você acertou 1 posição!");
                 return true;
