@@ -54,16 +54,7 @@ internal class Program
 
 
 
-
-        //----- DEFINE ALTERNÂNCIA ENTRE OS JOGADORES ---//   CRIAR METODO QUE FAZ ESSA ALTERNANCIA!!
-        if (jogadorAtual == jogador1)
-        {
-            campoJogadorAtual = campo1;
-        }
-        else if (jogadorAtual == jogador2)
-        {
-            campoJogadorAtual = campo2;
-        }
+              
 
 
 
@@ -110,13 +101,44 @@ internal class Program
 
 
 
+
+
+        void AlteraOrdemJogador()
+        {
+            if (jogadorAtual == jogador1)
+            {
+                jogadorAtual = jogador2;
+            }
+            else 
+            {
+                jogadorAtual = jogador1;
+            }
+        }
+
+        void AlteraOrdemCampo() //alterar
+        {
+            if (campoJogadorAtual == campo1)
+            {
+                campoJogadorAtual = campo2;
+            }
+            else 
+            {
+                campoJogadorAtual = campo2;
+            }
+        }
+
+
+
+
+
+
         void InserirNaviosPorJogador()
         {
             MostrarCampoDeBatalha(campoJogadorAtual);
 
             Console.WriteLine();
 
-            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome);
+            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + "INFORME AS COORDENADAS DESEJADAS.");
 
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao1.Alinhamento = orientacaoJogador;
@@ -152,10 +174,10 @@ internal class Program
             Console.Clear();
 
             //------------ COLONA NAVIOS JOGADOR 2---------------------------//
-            jogadorAtual = jogador2; // ALTERNA JOGADOR
-            campoJogadorAtual = campo2; // ALTERNA CAMPO
+            AlteraOrdemJogador(); // ALTERNA JOGADOR
+            AlteraOrdemCampo(); // ALTERNA CAMPO
             Console.WriteLine();
-            Console.WriteLine("\n  JOGADOR: " + jogadorAtual.Nome);
+            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + "INFORME AS COORDENADAS DESEJADAS.");
             MostrarCampoDeBatalha(campoJogadorAtual);
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao2.Alinhamento = orientacaoJogador;
