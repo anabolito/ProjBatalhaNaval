@@ -12,7 +12,8 @@ namespace ProjBatalhaNaval
 
         public PortaAvioes()
         {
-            this.Tamanho = 4;   
+            this.Tamanho = 4;
+            this.Nome = "PORTAAVIÕES";
         }
     }
 }

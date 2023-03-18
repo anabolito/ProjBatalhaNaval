@@ -11,6 +11,7 @@ namespace ProjBatalhaNaval
         public Submarino()
         {
             this.Tamanho = 2;
+            this.Nome = "SUBMARINO";
         }
     }
 }

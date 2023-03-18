@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Reflection;
 using System.Runtime.Intrinsics.X86;
@@ -11,26 +12,28 @@ internal class Program
         char[,] campo1 = new char[20, 20];
         char[,] campo2 = new char[20, 20];
         char[,] campoJogadorAtual;
-        char[] letras = new char[20] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
+       // char[] letras = new char[20] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
         int colunaCampo = 0;
         int posicaoLinha = 0;
         bool acertou = false;
         bool fimPartida = false;
         Jogador jogadorAtual;
+        string vencedor = null;
 
 
         PreenchimentoInicialCampo(campo1);
         PreenchimentoInicialCampo(campo2);
 
 
-        campoJogadorAtual = campo1; //  define valor inicial do jogadorAtual
-
-
 
         // -- CRIAÇÃO DOS JOGADORES--//
         Jogador jogador1 = new();
         Jogador jogador2 = new();
+
+
         jogadorAtual = jogador1;         // JOGADORATUAL COMEÇA COMO JOGADOR1
+        campoJogadorAtual = campo1; //  define valor inicial do jogadorAtual
+
 
 
         // -- CRIAÇÃO DAS EMBARCAÇÕES--
@@ -43,64 +46,97 @@ internal class Program
         Submarino submarino1 = new();
         Submarino submarino2 = new();
 
-
-
-
-
-
-
         Embarcacao embarcacaoAtual = submarino1;
 
+       
 
+        InserirNaviosPorJogador();    // INSERE OS NAVIOS
 
+        
 
-              
-
-
-
+        //COMECA COM JOGADOR 1 ATIRANDO NO CAMPO 2!!!!
         do
         {
+            Console.WriteLine($"\t\t { jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO DO JOGADOR {InformarNomeAdversario()}");
+            Thread.Sleep( 1800 );
 
 
-            InserirNaviosPorJogador();
-
-
-            jogadorAtual = jogador1;
-
-            Console.Write("\nJogador " + jogadorAtual.Nome);
-
-            while (jogadorAtual.Disparar(campoJogadorAtual))
+            while (jogadorAtual.Disparar(campoJogadorAtual))           // INICIALMENTE SERA JOGADOR1 ATIRANDO NO CAMPO2
             {
-                jogadorAtual.Disparar(campoJogadorAtual);
+                AlteraOrdemJogador(); // altera o jogador atual pra decrementar a vida ( pq tomou tiro)
+                jogadorAtual.DecrementaVida(); // volta no jogador anterior ( que acertou o tiro)
+                Console.WriteLine(jogadorAtual.Nome + " ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
+                if (jogadorAtual.RetornaVida() == 0)
+                {
+                    AlteraOrdemJogador();
+                    vencedor = jogadorAtual.Nome;
+                    return;
+                }
+                AlteraOrdemJogador();
+
+
+                //  IF E ELSE APENAS PARA VERIFICAR  E TESTAR ALTERNANCIA DO CAMPO
+                //Console.WriteLine(" Campo atual nesse momento é: "); 
+                //if (campoJogadorAtual == campo1)
+                //{
+                //    Console.WriteLine("CAMPO 1");
+                //}
+                //else
+                //{
+                //    Console.WriteLine("CAMPO 2");
+                //}
+
+                //Thread.Sleep(5000);
+
             }
-            jogadorAtual.Disparar(campoJogadorAtual); // disparo!!
 
-            jogadorAtual = jogador2;
-            campoJogadorAtual = campo1;
+            AlteraOrdemJogador();
+            AlteraOrdemCampo();
+            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO DO JOGADOR {InformarNomeAdversario()}");
+            MostrarCampoDeBatalha(campoJogadorAtual);
 
-            Console.Write("\nJogador " + jogadorAtual.Nome);
-
-            while (jogadorAtual.Disparar(campoJogadorAtual))
+            while (jogadorAtual.Disparar(campoJogadorAtual))         
             {
-                jogadorAtual.Disparar(campoJogadorAtual);
+                AlteraOrdemJogador(); 
+                jogadorAtual.DecrementaVida();
+                Console.WriteLine(jogadorAtual.Nome + " ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
+                if (jogadorAtual.RetornaVida() == 0)
+                {
+                    AlteraOrdemJogador();
+                    vencedor = jogadorAtual.Nome;
+                    return;
+                }
+
+                AlteraOrdemJogador();
+
             }
-            jogadorAtual.Disparar(campoJogadorAtual);
+
+            AlteraOrdemJogador();
+            AlteraOrdemCampo();
+            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO DO JOGADOR {InformarNomeAdversario()}");
+            MostrarCampoDeBatalha(campoJogadorAtual);
 
 
+            Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
+            Thread.Sleep(8000);
+
+        } while (vencedor == null);
 
 
+        
+
+        string InformarNomeAdversario()
+        {
+            if(jogadorAtual == jogador1)
+            {
+                string nomeAdversario = jogador2.Nome;
+                return nomeAdversario;
+            }
+            return jogador2.Nome;
+        }
 
 
-
-            fimPartida = true; // apenas para teste
-
-
-
-        } while (fimPartida == false);
-
-
-
-
+        
 
 
         void AlteraOrdemJogador()
@@ -115,7 +151,7 @@ internal class Program
             }
         }
 
-        void AlteraOrdemCampo() //alterar
+        void AlteraOrdemCampo() 
         {
             if (campoJogadorAtual == campo1)
             {
@@ -123,7 +159,7 @@ internal class Program
             }
             else 
             {
-                campoJogadorAtual = campo2;
+                campoJogadorAtual = campo1;
             }
         }
 
@@ -138,7 +174,7 @@ internal class Program
 
             Console.WriteLine();
 
-            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + "INFORME AS COORDENADAS DESEJADAS.");
+            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + " INFORME AS COORDENADAS DESEJADAS.");
 
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao1.Alinhamento = orientacaoJogador;
@@ -148,7 +184,7 @@ internal class Program
 
             Console.Clear();
 
-            MostrarCampoDeBatalha(campoJogadorAtual);
+            MostrarCampoDeBatalha(campoJogadorAtual); // mostra na tela o campo do jogador 1
 
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             submarino1.Alinhamento = orientacaoJogador;
@@ -174,11 +210,12 @@ internal class Program
             Console.Clear();
 
             //------------ COLONA NAVIOS JOGADOR 2---------------------------//
-            AlteraOrdemJogador(); // ALTERNA JOGADOR
-            AlteraOrdemCampo(); // ALTERNA CAMPO
+
+            AlteraOrdemJogador(); // ALTERNA PARA JOGADOR 2
+            AlteraOrdemCampo(); // ALTERNA  PARA CAMPO2!!
             Console.WriteLine();
             Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + "INFORME AS COORDENADAS DESEJADAS.");
-            MostrarCampoDeBatalha(campoJogadorAtual);
+            MostrarCampoDeBatalha(campoJogadorAtual); // mostra na tela o campo do jogador 2!!
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao2.Alinhamento = orientacaoJogador;
 
@@ -208,11 +245,13 @@ internal class Program
             Console.Clear();
 
             MostrarCampoDeBatalha(campoJogadorAtual);
+            AlteraOrdemJogador(); // altera para jogador 1 apos o jogador 2 colocar seus navios
         }
 
 
         void MostrarCampoDeBatalha(char[,] matriz)
         {
+            
             Console.ForegroundColor = ConsoleColor.Cyan;
 
             Console.Write("        A    B    C    D    E    F    G    H");

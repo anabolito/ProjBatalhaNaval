@@ -11,6 +11,7 @@ namespace ProjBatalhaNaval
         public Destroyer()
         {
             this.Tamanho = 3;
+            this.Nome = "DESTROYER";
         }
     }
 }

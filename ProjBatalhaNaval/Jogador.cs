@@ -14,10 +14,11 @@ namespace ProjBatalhaNaval
         private static int numeroDoJogador = 0;
 
         public string Nome { get; set; }
-        
+        public int contadorDeVida { get; set; }
 
         public Jogador()
-        {   
+        {
+            contadorDeVida = 9;  // é a soma dos tamanhos dos navios, se tomar 9 tiros perde ( 2 do submarino, 3 do destroyer e 4 do portaAviões
             this.Nome = "PLAYER " + numeroDoJogador;
             numeroDoJogador++;
             Console.WriteLine();
@@ -29,19 +30,30 @@ namespace ProjBatalhaNaval
         }
 
 
+        public void DecrementaVida()  // metdo vai ser chamado pelo jogador na main qdo o adversario acertar tiro
+        {
+            contadorDeVida--;
+        }
+
+        public int RetornaVida()
+        {
+            return this.contadorDeVida;
+        }
+
+
 
         public bool Disparar(char[,] matriz)
         {
 
             char colunaAlvo;
-            int linhaAlvo;            //era string
+            int linhaAlvo;            
             char coluna;
             string aux;
             bool continua = false;
 
             
-            Console.Write("\ninforme a COLUNA que deseja atirar: ");
-            coluna = Console.ReadKey(true).KeyChar; // alterado
+            Console.Write("\nJOGADOR " + this.Nome + " INFORME A COLUNA DA POSIÇÃO QUE DESEJA ATIRAR: ");
+            coluna = Console.ReadKey(true).KeyChar; 
             colunaAlvo = char.ToUpper(coluna);
             int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
 
@@ -49,11 +61,11 @@ namespace ProjBatalhaNaval
 
             do
             {
-                Console.Write("\ninforme a LINHA que deseja atirar: ");
+                Console.Write("\nINFORME A LINHA QUE DESEJA ATIRAR: ");
                 aux = Console.ReadLine();
 
 
-                //aux = Console.ReadLine();
+                
                 if (!int.TryParse(aux, out linhaAlvo))
                 {
                     Console.WriteLine("Informe APENAS numeros, entre 1 e 20!");
@@ -66,15 +78,13 @@ namespace ProjBatalhaNaval
 
             } while (continua == false);
 
-            
-
-
-
-
 
             if (matriz[(linhaAlvo)-1, numeroDaColuna] == 'X')
             {
                 Console.WriteLine("\n  Você acertou 1 posição!");
+                matriz[(linhaAlvo) - 1, numeroDaColuna] = '@'; // marca local do tiro certeiro
+                
+
                 return true;
             }
             else
@@ -132,6 +142,8 @@ namespace ProjBatalhaNaval
             } while (index < 0);
             return index;
         }
+
+
 
 
         public int TransformaLetraDaColunaEmNumero(char letraColuna)
