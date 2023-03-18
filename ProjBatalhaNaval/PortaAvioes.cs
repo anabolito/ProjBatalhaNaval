@@ -8,12 +8,10 @@ namespace ProjBatalhaNaval
 {
     internal class PortaAvioes : Embarcacao
     {
-        
-
         public PortaAvioes()
         {
             this.Tamanho = 4;
-            this.Nome = "PORTAAVIÕES";
+            this.Nome = "PORTA AVIÕES";
         }
     }
 }
