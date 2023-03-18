@@ -98,9 +98,6 @@ internal class Program
 
         } while (vencedor == null);
 
-
-
-
         string InformarNomeAdversario()
         {
             if (jogadorAtual == jogador1)
@@ -110,10 +107,6 @@ internal class Program
             }
             return jogador2.Nome;
         }
-
-
-
-
 
         void AlteraOrdemJogador()
         {
@@ -258,7 +251,6 @@ internal class Program
 
         int TransformaLetraDaColunaEmNumero()
         {
-
             char colunaDesejada;
             char letraColuna;
             string todasLetras = "ABCDEFGHIJKLMNOPQRST";
@@ -294,14 +286,10 @@ internal class Program
             int linhaEscolhida;
             int contadorPosicoesNavio = navio.Tamanho - 1;
             bool naoCabe = false;  //new
-            string aux;
             do
             {
-
                 Console.Write("  Informe a linha desejada: ");
-
-                aux = Console.ReadLine();
-                if (!int.TryParse(aux, out linhaEscolhida) || (linhaEscolhida > 20))
+                if (!int.TryParse(Console.ReadLine(), out linhaEscolhida) || (linhaEscolhida > 20))
                 {
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
@@ -364,8 +352,6 @@ internal class Program
             {
                 do
                 {
-
-
                     //Console.Read(); PROBLEMA DO ERRO NA LINHA ESCOLHIDA 
                     matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
@@ -404,7 +390,6 @@ internal class Program
                         contador++;
                     }
                 }
-
             }
         }
 

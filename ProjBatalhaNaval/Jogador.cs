@@ -79,19 +79,14 @@ namespace ProjBatalhaNaval
             {
                 Console.WriteLine("\n  Você acertou 1 posição!");
                 matriz[(linhaAlvo) - 1, numeroDaColuna] = '@'; // marca local do tiro certeiro
-
-
                 return true;
             }
             else
             {
                 Console.WriteLine("\n  Você errou o alvo!");
             }
-
             return false;
         }
-
-
 
         public char RetornarOrientacao()
         {
@@ -108,7 +103,6 @@ namespace ProjBatalhaNaval
             } while (orientacao != 'V' && orientacao != 'H');
 
             return orientacao;
-
         }
 
         public int TransformaLetraDaColunaEmNumero()
