@@ -76,7 +76,7 @@ internal class Program
 
             jogadorAtual = jogador1;
 
-            Console.Write("\nJogador " + jogadorAtual.Nome + ", ");
+            Console.Write("\nJogador " + jogadorAtual.Nome);
 
             while (jogadorAtual.Disparar(campoJogadorAtual))
             {
@@ -87,7 +87,7 @@ internal class Program
             jogadorAtual = jogador2;
             campoJogadorAtual = campo1;
 
-            Console.Write("\nJogador " + jogadorAtual.Nome + ", ");
+            Console.Write("\nJogador " + jogadorAtual.Nome);
 
             while (jogadorAtual.Disparar(campoJogadorAtual))
             {
