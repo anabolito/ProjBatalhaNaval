@@ -58,6 +58,7 @@ internal class Program
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
+                    Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
                     return;
                 }
                 AlteraOrdemJogador();
@@ -79,6 +80,7 @@ internal class Program
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
+                    Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
                     return;
                 }
 
@@ -93,10 +95,14 @@ internal class Program
             MostrarCampoDeBatalha(campoJogadorAtual);
 
 
-            Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
-            Thread.Sleep(8000);
+            //Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
+           // Thread.Sleep(8000);
 
         } while (vencedor == null);
+
+
+
+
 
         string InformarNomeAdversario()
         {

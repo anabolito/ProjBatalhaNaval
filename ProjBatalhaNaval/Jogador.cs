@@ -75,6 +75,12 @@ namespace ProjBatalhaNaval
                 }
             } while (linhaInvalida);
 
+            if (matriz[(linhaAlvo) - 1, numeroDaColuna] == '@')
+            {
+                Console.WriteLine(" VOCÊ JÁ  DISPAROU NESSA COORDENADA ANTERIORMENTE!");
+                return false;
+            }
+
             if (matriz[(linhaAlvo) - 1, numeroDaColuna] == 'X')
             {
                 Console.WriteLine("\n  Você acertou 1 posição!");
