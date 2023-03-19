@@ -62,20 +62,6 @@ internal class Program
                 }
                 AlteraOrdemJogador();
 
-
-                //  IF E ELSE APENAS PARA VERIFICAR  E TESTAR ALTERNANCIA DO CAMPO
-                //Console.WriteLine(" Campo atual nesse momento é: "); 
-                //if (campoJogadorAtual == campo1)
-                //{
-                //    Console.WriteLine("CAMPO 1");
-                //}
-                //else
-                //{
-                //    Console.WriteLine("CAMPO 2");
-                //}
-
-                //Thread.Sleep(5000);
-
             }
 
             AlteraOrdemJogador();
@@ -112,9 +98,6 @@ internal class Program
 
         } while (vencedor == null);
 
-
-        
-
         string InformarNomeAdversario()
         {
             if (jogadorAtual == jogador1)
@@ -137,7 +120,7 @@ internal class Program
             }
         }
 
-        void AlteraOrdemCampo() 
+        void AlteraOrdemCampo()
         {
             if (campoJogadorAtual == campo1)
             {
@@ -265,9 +248,6 @@ internal class Program
             Console.ResetColor();
 
         }
-
-
-
 
         int TransformaLetraDaColunaEmNumero()
         {
