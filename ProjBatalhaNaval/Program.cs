@@ -254,6 +254,11 @@ internal class Program
 
         }
 
+
+
+
+
+
         int TransformaLetraDaColunaEmNumero()
         {
             char colunaDesejada;
