@@ -53,9 +53,8 @@ namespace ProjBatalhaNaval
 
             
             Console.Write("\nJOGADOR " + this.Nome + " INFORME A COLUNA DA POSIÇÃO QUE DESEJA ATIRAR: ");
-            coluna = Console.ReadKey(true).KeyChar;            
+            coluna = Console.ReadKey(true).KeyChar; 
             colunaAlvo = char.ToUpper(coluna);
-            Console.Write(colunaAlvo);
             int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
 
 
@@ -80,23 +79,17 @@ namespace ProjBatalhaNaval
             } while (continua == false);
 
 
-
-             if (matriz[(linhaAlvo) - 1, numeroDaColuna] == '@' )
-            {
-                Console.WriteLine(" VOCÊ JÁ  DISPAROU NESSA COORDENADA ANTERIORMENTE!");
-                return false;
-            }
-
             if (matriz[(linhaAlvo)-1, numeroDaColuna] == 'X')
             {
-                Console.WriteLine("\n  VOCÊ ACERTOU 1 ALVO!");
-                matriz[(linhaAlvo) - 1, numeroDaColuna] = '@'; // marca local do tiro certeiro e evita que seja contabilizado 2 tiros no mesmo lugar
+                Console.WriteLine("\n  Você acertou 1 posição!");
+                matriz[(linhaAlvo) - 1, numeroDaColuna] = '@'; // marca local do tiro certeiro
                 
+
                 return true;
             }
             else
             {
-                Console.WriteLine("\n  VOCÊ ERROU O ALVO!");
+                Console.WriteLine("\n  Você errou o alvo!");
             }
 
             return false;
@@ -161,7 +154,8 @@ namespace ProjBatalhaNaval
             string todasLetras = "ABCDEFGHIJKLMNOPQRST";
             int index = -1;
 
-          
+          //  Console.WriteLine("Informe a coluna para colocar a embarcação: ");
+           // letraColuna = Console.ReadKey(true).KeyChar;
             colunaDesejada = char.ToUpper(letraColuna);
 
             do

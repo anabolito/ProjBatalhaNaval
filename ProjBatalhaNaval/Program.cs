@@ -14,7 +14,8 @@ internal class Program
         char[,] campoJogadorAtual;
         int colunaCampo = 0;
         int posicaoLinha = 0;
-       // bool acertou = false;     
+        bool acertou = false;
+        bool fimPartida = false;
         Jogador jogadorAtual;
         string vencedor = null;
 
@@ -57,11 +58,23 @@ internal class Program
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
-                    Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
-                    Console.WriteLine();
                     return;
                 }
                 AlteraOrdemJogador();
+
+
+                //  IF E ELSE APENAS PARA VERIFICAR  E TESTAR ALTERNANCIA DO CAMPO
+                //Console.WriteLine(" Campo atual nesse momento é: "); 
+                //if (campoJogadorAtual == campo1)
+                //{
+                //    Console.WriteLine("CAMPO 1");
+                //}
+                //else
+                //{
+                //    Console.WriteLine("CAMPO 2");
+                //}
+
+                //Thread.Sleep(5000);
 
             }
 
@@ -80,9 +93,7 @@ internal class Program
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
-                    Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
-                    Console.WriteLine();
-                    break;
+                    return;
                 }
 
                 AlteraOrdemJogador();
@@ -96,15 +107,13 @@ internal class Program
             MostrarCampoDeBatalha(campoJogadorAtual);
 
 
-           
+            Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
+            Thread.Sleep(8000);
 
         } while (vencedor == null);
 
 
-
-
-                                //METODOS
-
+        
 
         string InformarNomeAdversario()
         {
@@ -128,9 +137,6 @@ internal class Program
             }
         }
 
-
-
-
         void AlteraOrdemCampo() 
         {
             if (campoJogadorAtual == campo1)
@@ -142,6 +148,7 @@ internal class Program
                 campoJogadorAtual = campo1;
             }
         }
+
 
 
 
@@ -193,7 +200,7 @@ internal class Program
             AlteraOrdemJogador(); // ALTERNA PARA JOGADOR 2
             AlteraOrdemCampo(); // ALTERNA  PARA CAMPO2!!
             Console.WriteLine();
-            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + " INFORME AS COORDENADAS DESEJADAS.");
+            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + "INFORME AS COORDENADAS DESEJADAS.");
             MostrarCampoDeBatalha(campoJogadorAtual); // mostra na tela o campo do jogador 2!!
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao2.Alinhamento = orientacaoJogador;
@@ -262,11 +269,11 @@ internal class Program
 
 
 
-        int TransformaLetraDaColunaEmNumero() // METODO ESTA SENDO REPETIDO NA CLASSE JOGADOR!!
+        int TransformaLetraDaColunaEmNumero()
         {
             char colunaDesejada;
             char letraColuna;
-           string todasLetras = "ABCDEFGHIJKLMNOPQRST";
+            string todasLetras = "ABCDEFGHIJKLMNOPQRST";
             int index = -1;
 
             do
@@ -274,14 +281,14 @@ internal class Program
 
                 Console.Write("  Informe a coluna para colocar a embarcação: ");
                 letraColuna = Console.ReadKey(true).KeyChar;
-               colunaDesejada = char.ToUpper(letraColuna);
+                colunaDesejada = char.ToUpper(letraColuna);
                 index = todasLetras.IndexOf(colunaDesejada);
-               Console.WriteLine(colunaDesejada);
+                Console.WriteLine(colunaDesejada);
                 Console.WriteLine();
 
                 if (index < 0)
-               {
-                   Console.WriteLine();
+                {
+                    Console.WriteLine();
                     Console.WriteLine("  Coluna informada não foi localizada. Informe a coluna novamente!");
                     Thread.Sleep(2000);
 
