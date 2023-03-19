@@ -95,8 +95,7 @@ internal class Program
             MostrarCampoDeBatalha(campoJogadorAtual);
 
 
-            //Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
-           // Thread.Sleep(8000);
+            
 
         } while (vencedor == null);
 
