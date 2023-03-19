@@ -12,28 +12,21 @@ internal class Program
         char[,] campo1 = new char[20, 20];
         char[,] campo2 = new char[20, 20];
         char[,] campoJogadorAtual;
-       // char[] letras = new char[20] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
         int colunaCampo = 0;
         int posicaoLinha = 0;
        // bool acertou = false;     
         Jogador jogadorAtual;
         string vencedor = null;
 
-
         PreenchimentoInicialCampo(campo1);
         PreenchimentoInicialCampo(campo2);
-
-
 
         // -- CRIAÇÃO DOS JOGADORES--//
         Jogador jogador1 = new();
         Jogador jogador2 = new();
 
-
         jogadorAtual = jogador1;         // JOGADORATUAL COMEÇA COMO JOGADOR1
         campoJogadorAtual = campo1; //  define valor inicial do jogadorAtual
-
-
 
         // -- CRIAÇÃO DAS EMBARCAÇÕES--
         PortaAvioes portaAviao1 = new();
@@ -47,20 +40,15 @@ internal class Program
 
         Embarcacao embarcacaoAtual = submarino1;
 
-       
-
         InserirNaviosPorJogador();    // INSERE OS NAVIOS
-
-        
 
         //COMECA COM JOGADOR 1 ATIRANDO NO CAMPO 2!!!!
         do
         {
-            Console.WriteLine($"\t\t { jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO DO JOGADOR {InformarNomeAdversario()}");
-            Thread.Sleep( 1800 );
+            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
+                $" DO JOGADOR {InformarNomeAdversario()}");
 
-
-            while (jogadorAtual.Disparar(campoJogadorAtual))           // INICIALMENTE SERA JOGADOR1 ATIRANDO NO CAMPO2
+            while (jogadorAtual.Disparar(campoJogadorAtual)) // INICIALMENTE SERA JOGADOR1 ATIRANDO NO CAMPO2
             {
                 AlteraOrdemJogador(); // altera o jogador atual pra decrementar a vida ( pq tomou tiro)
                 jogadorAtual.DecrementaVida(); // volta no jogador anterior ( que acertou o tiro)
@@ -79,12 +67,13 @@ internal class Program
 
             AlteraOrdemJogador();
             AlteraOrdemCampo();
-            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO DO JOGADOR {InformarNomeAdversario()}");
+            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
+                $" DO JOGADOR {InformarNomeAdversario()}");
             MostrarCampoDeBatalha(campoJogadorAtual);
 
-            while (jogadorAtual.Disparar(campoJogadorAtual))         
+            while (jogadorAtual.Disparar(campoJogadorAtual))
             {
-                AlteraOrdemJogador(); 
+                AlteraOrdemJogador();
                 jogadorAtual.DecrementaVida();
                 Console.WriteLine(jogadorAtual.Nome + " ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
                 if (jogadorAtual.RetornaVida() == 0)
@@ -102,7 +91,8 @@ internal class Program
 
             AlteraOrdemJogador();
             AlteraOrdemCampo();
-            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO DO JOGADOR {InformarNomeAdversario()}");
+            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO" +
+                $" CAMPO DO JOGADOR {InformarNomeAdversario()}");
             MostrarCampoDeBatalha(campoJogadorAtual);
 
 
@@ -118,7 +108,7 @@ internal class Program
 
         string InformarNomeAdversario()
         {
-            if(jogadorAtual == jogador1)
+            if (jogadorAtual == jogador1)
             {
                 string nomeAdversario = jogador2.Nome;
                 return nomeAdversario;
@@ -126,17 +116,13 @@ internal class Program
             return jogador2.Nome;
         }
 
-
-        
-
-
         void AlteraOrdemJogador()
         {
             if (jogadorAtual == jogador1)
             {
                 jogadorAtual = jogador2;
             }
-            else 
+            else
             {
                 jogadorAtual = jogador1;
             }
@@ -151,7 +137,7 @@ internal class Program
             {
                 campoJogadorAtual = campo2;
             }
-            else 
+            else
             {
                 campoJogadorAtual = campo1;
             }
@@ -193,7 +179,7 @@ internal class Program
             destroyer1.Alinhamento = orientacaoJogador;
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
-            
+
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
 
             Console.Clear();
@@ -244,13 +230,11 @@ internal class Program
 
         void MostrarCampoDeBatalha(char[,] matriz)
         {
-            
+
             Console.ForegroundColor = ConsoleColor.Cyan;
 
-            Console.Write("        A    B    C    D    E    F    G    H");
-            Console.Write("    I    J    K    L    M    N    O    P");
-            Console.Write("    Q    R    S    T ");
-            Console.WriteLine();
+            Console.Write("        A    B    C    D    E    F    G    H" +
+                "    I    J    K    L    M    N    O    P    Q    R    S    T \n");
             int contador = 1;
 
             for (int linha = 1; linha <= 20; linha++)
@@ -280,12 +264,10 @@ internal class Program
 
         int TransformaLetraDaColunaEmNumero() // METODO ESTA SENDO REPETIDO NA CLASSE JOGADOR!!
         {
-
             char colunaDesejada;
             char letraColuna;
            string todasLetras = "ABCDEFGHIJKLMNOPQRST";
             int index = -1;
-
 
             do
             {
@@ -311,43 +293,28 @@ internal class Program
             return index;
         }
 
-
-
-
         void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
-
-            
 
             int linhaEscolhida;
             int contadorPosicoesNavio = navio.Tamanho - 1;
             bool naoCabe = false;  //new
-            string aux;
             do
             {
-
-
                 Console.Write("  Informe a linha desejada: ");
-
-                aux = Console.ReadLine();
-                if (!int.TryParse(aux, out linhaEscolhida) || (linhaEscolhida > 20))
+                if (!int.TryParse(Console.ReadLine(), out linhaEscolhida) || (linhaEscolhida > 20))
                 {
                     Console.Clear();
                     MostrarCampoDeBatalha(campoJogadorAtual);
-                    Console.WriteLine("Informe APENAS numeros, entre 1 e 20!");
-                    Thread.Sleep(500); // faz a mensagem ficar por 0.5 segundo !
+                    Console.WriteLine("Informe APENAS numeros, entre 1 e 20!/nPressione qualquer tecla" +
+                        " para continuar");
                 }
 
-
-                    
-
-                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
+                if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
                 {
                     Console.WriteLine("Posição inválida, escolha novamente.");
 
                 }
-
-
 
                 /*if (linhaEscolhida<1 || linhaEscolhida>20)
                 {
@@ -371,9 +338,6 @@ internal class Program
 
             matriz[linhaEscolhida - 1, colun] = 'X';
 
-
-
-
             if (navio.Alinhamento == 'V')
             {
                 contadorPosicoesNavio = navio.Tamanho - 1;
@@ -393,38 +357,20 @@ internal class Program
                             break;
                         }
                     }
-                    else
-                    {
-
-                    }
-
-
                 } while (contadorPosicoesNavio > 0);
             }
             contadorPosicoesNavio = navio.Tamanho - 1;
 
             if (navio.Alinhamento == 'H')
             {
-
-
                 do
                 {
-
-
                     //Console.Read(); PROBLEMA DO ERRO NA LINHA ESCOLHIDA 
                     matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
-
-
                 } while (contadorPosicoesNavio > 0);
-
-
             }
-
         }
-
-
-
 
         void PreenchimentoInicialCampo(char[,] matriz)
         {
@@ -437,20 +383,14 @@ internal class Program
             }
         }
 
-
-
         void ExibeMatrizPreenchida(char[,] matriz)
         {
-            Console.Write("        A   B   C   D   E   F   G   H");
-            Console.Write("   I   J   K   L   M   N   O   P");
-            Console.Write("   Q   R   S   T ");
-            Console.WriteLine();
+            Console.Write("        A   B   C   D   E   F   G   H   I   " +
+                "J   K   L   M   N   O   P   Q   R   S   T /n");
             int contador = 1;
 
             for (int linha = 1; linha <= 20; linha++)
             {
-
-                //contador++;
                 Console.Write("  " + contador.ToString("d2") + " ");
                 for (int coluna = 1; coluna <= 20; coluna++)
                 {
@@ -463,11 +403,9 @@ internal class Program
                         contador++;
                     }
                 }
-
             }
         }
 
 
     }
 }
-
