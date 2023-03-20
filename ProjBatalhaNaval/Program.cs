@@ -46,7 +46,7 @@ internal class Program
         //COMECA COM JOGADOR 1 ATIRANDO NO CAMPO 2!!!!
         do
         {
-            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
+            Console.WriteLine($"\n\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
                 $" DO JOGADOR {InformarNomeAdversario()}");
 
             while (jogadorAtual.Disparar(campoJogadorAtual)) // INICIALMENTE SERA JOGADOR1 ATIRANDO NO CAMPO2
@@ -67,7 +67,7 @@ internal class Program
 
             AlteraOrdemJogador();
             AlteraOrdemCampo();
-            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
+            Console.WriteLine($"\n\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
                 $" DO JOGADOR {InformarNomeAdversario()}");
             MostrarCampoDeBatalha(campoJogadorAtual);
 
@@ -148,7 +148,7 @@ internal class Program
 
             Console.WriteLine();
 
-            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + " INFORME AS COORDENADAS DESEJADAS.");
+            Console.WriteLine("  JOGADOR " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS.");
 
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao1.Alinhamento = orientacaoJogador;
@@ -188,7 +188,7 @@ internal class Program
             AlteraOrdemJogador(); // ALTERNA PARA JOGADOR 2
             AlteraOrdemCampo(); // ALTERNA  PARA CAMPO2!!
             Console.WriteLine();
-            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + "INFORME AS COORDENADAS DESEJADAS.");
+            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS.");
             MostrarCampoDeBatalha(campoJogadorAtual); // mostra na tela o campo do jogador 2!!
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao2.Alinhamento = orientacaoJogador;
@@ -306,12 +306,13 @@ internal class Program
                     Console.WriteLine("Informe APENAS numeros, entre 1 e 20!/nPressione qualquer tecla" +
                         " para continuar");
                 }
+               
+                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
+                    {
+                        Console.WriteLine("Posição inválida, escolha novamente.");
 
-                if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
-                {
-                    Console.WriteLine("Posição inválida, escolha novamente.");
+                    }
 
-                }
 
                 /*if (linhaEscolhida<1 || linhaEscolhida>20)
                 {
