@@ -346,26 +346,31 @@ internal class Program
 
                 Console.Write("  Informe a linha desejada: ");
 
-                linhaEscolhida = int.Parse(Console.ReadLine());
-
-                do      // do-while Novo para não cruzar navios 
+                while (!int.TryParse(Console.ReadLine(), out linhaEscolhida))
                 {
-                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
+                    Console.Write("  Informe a linha desejada novamente: ");
+                   // linhaEscolhida = int.Parse(Console.ReadLine());
+
+                }
+
+                    do      // do-while Novo para não cruzar navios 
+                {
+                    if (navio.Alinhamento =='V' && matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
                     {
                         Console.WriteLine("Posição já ocupada, escolha novamente.");
-                        Console.WriteLine("  Tecle para continuar....");
+                        Console.WriteLine("  Tecle para continuar...." + jogadorAtual.Nome);
                         naoCabe = true;
                         Console.ReadKey();
-                        return;
+                        break;
 
                     }
-                    if (matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
+                    if (navio.Alinhamento == 'H' && matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
                     {
                         Console.WriteLine("Posição já ocupada, escolha novamente.");
                         Console.WriteLine("  Tecle para continuar....");
                         naoCabe = true;
                         Console.ReadKey();
-                        return;
+                        break;
                     }
                     contadorPosicoesNavio--;
 
