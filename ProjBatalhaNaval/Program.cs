@@ -41,7 +41,8 @@ internal class Program
 
         Embarcacao embarcacaoAtual = submarino1;
 
-        InserirNaviosPorJogador();    // INSERE OS NAVIOS
+        InserirNaviosPorJogador();
+        EscondeNavio(campoJogadorAtual);    /// TENTTIVA MATRIZ Q ESCONDE
 
         //COMECA COM JOGADOR 1 ATIRANDO NO CAMPO 2!!!!
         do
@@ -69,7 +70,8 @@ internal class Program
             AlteraOrdemCampo();
             Console.WriteLine($"\n\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
                 $" DO JOGADOR {InformarNomeAdversario()}");
-            MostrarCampoDeBatalha(campoJogadorAtual);
+            // MostrarCampoDeBatalha(campoJogadorAtual); //DESCOMENTAR DEPOIS
+            EscondeNavio(campoJogadorAtual);
 
             while (jogadorAtual.Disparar(campoJogadorAtual))
             {
@@ -92,10 +94,11 @@ internal class Program
             AlteraOrdemCampo();
             Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO" +
                 $" CAMPO DO JOGADOR {InformarNomeAdversario()}");
-            MostrarCampoDeBatalha(campoJogadorAtual);
+            // MostrarCampoDeBatalha(campoJogadorAtual);    //DESCOMENTR DEPOIS
+            EscondeNavio(campoJogadorAtual);
 
 
-            
+
 
         } while (vencedor == null);
 
@@ -255,10 +258,49 @@ internal class Program
         }
 
 
+        //**********************************************************************
+
+
+        void EscondeNavio(char[,] matriz)
+        {
+            Console.Clear(); // ADICCIONEI
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            Console.Write("        A    B    C    D    E    F    G    H" +
+                "    I    J    K    L    M    N    O    P    Q    R    S    T \n");
+            int contador = 1;
+
+            for (int linha = 1; linha <= 20; linha++)
+            {
+
+                //contador++;
+                Console.Write("  " + contador.ToString("d2") + " ");
+                for (int coluna = 1; coluna <= 20; coluna++)
+                {
+                    if (matriz[linha - 1, coluna - 1] == 'X')
+                        Console.Write(" |_" + '~' + "_");
+                    else if (matriz[linha - 1, coluna - 1] == '@')
+                        Console.Write(" |_" + '@' + "_");
+                    else if (matriz[linha - 1, coluna - 1] == 'A')
+                        Console.Write(" |_" + 'A' + "_");
+                    else
+                        Console.Write(" |_" + '~' + "_");
+                    if (coluna == 20)
+                    {
+                        Console.Write(" |");
+                        Console.WriteLine();
+                        contador++;
+                    }
+                }
+
+            }
+            Console.ResetColor();
+
+        }
 
 
 
-
+        //*********************************************************************
         int TransformaLetraDaColunaEmNumero()
         {
             char colunaDesejada;

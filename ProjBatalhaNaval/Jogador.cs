@@ -89,7 +89,8 @@ namespace ProjBatalhaNaval
             }
             else
             {
-                Console.WriteLine("\n  Você errou o alvo!");
+                matriz[(linhaAlvo) - 1, numeroDaColuna] = 'A';  //ADICIONADA
+                Console.WriteLine("\n  Você errou o alvo!  DEU ÁGUA!!!");
             }
             return false;
         }
