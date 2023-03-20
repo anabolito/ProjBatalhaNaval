@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics.X86;
 using ProjBatalhaNaval;
 
@@ -172,13 +173,15 @@ internal class Program
             submarino1.Alinhamento = orientacaoJogador;
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
-                bool retorno = false; // teste
+            
+            bool retorno = false; // teste
 
             while (retorno == false)
             {
                 retorno = ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino1);
 
             }
+            retorno = false;  // retornando o false p n pular o destroyer
 
             Console.Clear();
 
@@ -190,11 +193,16 @@ internal class Program
             colunaCampo = TransformaLetraDaColunaEmNumero();
             while (retorno == false)
             {
-                ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
+                retorno = ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
             }
+
+            retorno = false;
+
             Console.Clear();
 
             MostrarCampoDeBatalha(campoJogadorAtual);
+            Console.WriteLine("Aguarde um momento...");
+            Thread.Sleep(2000);
 
             Console.Clear();
 
@@ -221,8 +229,10 @@ internal class Program
             colunaCampo = TransformaLetraDaColunaEmNumero();
             while (retorno == false)
             {
-                ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino2);
+                retorno = ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino2);
             }
+            retorno = false;
+
             Console.Clear();
 
             MostrarCampoDeBatalha(campoJogadorAtual);
@@ -233,11 +243,17 @@ internal class Program
             colunaCampo = TransformaLetraDaColunaEmNumero();
             while (retorno == false)
             {
-                ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer2);
+                retorno = ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer2);
             }
+            retorno = false;
+
+
             Console.Clear();
 
             MostrarCampoDeBatalha(campoJogadorAtual);
+            Console.WriteLine("Aguarde um momento...");
+            Thread.Sleep(2000);
+
             AlteraOrdemJogador(); // altera para jogador 1 apos o jogador 2 colocar seus navios
         }
 
@@ -364,24 +380,27 @@ internal class Program
                 while (!int.TryParse(Console.ReadLine(), out linhaEscolhida))
                 {
                     Console.Write("  Informe a linha desejada novamente: ");
-                   
-
                 }
 
-                    do      // do-while Novo para não cruzar navios 
+                while( linhaEscolhida > 20 || linhaEscolhida <=0)
+                {
+                    Console.Write("  Informe a linha desejada entre 1 e 20: ");
+                    linhaEscolhida = int.Parse(Console.ReadLine());
+                }
+                //while (matriz[linhaEscolhida - 1, colun])
+
+
+                do      // do-while para não cruzar navios 
                 {
                     naoCabe = false;
 
                     if (navio.Alinhamento =='V' && matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
                     {
                         Console.WriteLine("Posição já ocupada, escolha novamente.");
-                        Console.WriteLine("  Tecle para continuar...." + jogadorAtual.Nome);
                         contadorPosicoesNavio++;
                         naoCabe = true;
                         Console.WriteLine(contadorPosicoesNavio);
-                        
-                        //Console.ReadKey();
-                        
+                       
                        break; 
                     }
                     if (navio.Alinhamento == 'H' && matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
@@ -412,7 +431,6 @@ internal class Program
             } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X' || naoCabe == true);  // naoCabe é novo
 
 
-
             matriz[linhaEscolhida - 1, colun] = 'X';
             
 
@@ -431,7 +449,9 @@ internal class Program
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("  Escolha outra posicao!");
+                            Console.ResetColor();
                             break;
                         }
                     }
