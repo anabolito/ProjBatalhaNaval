@@ -262,47 +262,41 @@ internal class Program
 
             int linhaEscolhida;
             int contadorPosicoesNavio = navio.Tamanho - 1;
-            bool naoCabe = false;  //new
+            bool naoCabe = false;
 
             do
             {
 
-
                 Console.Write("  Informe a linha desejada: ");
 
-                6linhaEscolhida = int.Parse(Console.ReadLine());      /////////////// MUITO PROBLEMA
-
-
-
-
-                //new
-
-                if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
+                linhaEscolhida = int.Parse(Console.ReadLine());
+               
+                do      // do-while Novo para não cruzar navios 
                 {
-                    Console.WriteLine("Posição inválida, escolha novamente.");
+                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
+                    {
+                        Console.WriteLine("Posição já ocupada, escolha novamente.");
+                        Console.WriteLine("  Tecle para continuar....");
+                        naoCabe = true;
+                        Console.ReadKey();
 
-                }
+                    }
+                    contadorPosicoesNavio--;
+
+                } while (contadorPosicoesNavio >0 || naoCabe == true);
 
 
-
-                /*if (linhaEscolhida<1 || linhaEscolhida>20)
+                if (linhaEscolhida<1 || linhaEscolhida>20)
                 {
                     Console.WriteLine("  Digite APENAS números ente 1 e 20!");
                     Console.WriteLine("  Tecle para continuar....");
                     Console.ReadKey();
-                    Console.Clear();
-                    MostrarCampoDeBatalha(campoJogadorAtual);
-                }*/
+                }
 
-                /*if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
-                {
-                    Console.Clear();
-                    MostrarCampoDeBatalha(campoJogadorAtual);
-                    Console.WriteLine("  Valor incorreto. Não existe essa linha!");
 
-                }*/
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X' || naoCabe == true);  // naoCabe é novo
 
-            } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X');  // naoCabe é novo
+
 
 
             matriz[linhaEscolhida - 1, colun] = 'X';
@@ -336,6 +330,8 @@ internal class Program
 
 
                 } while (contadorPosicoesNavio > 0);
+
+
             }
             contadorPosicoesNavio = navio.Tamanho - 1;
 
