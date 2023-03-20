@@ -138,7 +138,7 @@ internal class Program
             destroyer1.Alinhamento = orientacaoJogador;
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
-            
+
             ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, destroyer1);
 
             Console.Clear();
@@ -260,7 +260,7 @@ internal class Program
         void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
 
-            int linhaEscolhida;
+            int linhaEscolhida = 0;
             int contadorPosicoesNavio = navio.Tamanho - 1;
             bool naoCabe = false;
 
@@ -270,7 +270,7 @@ internal class Program
                 Console.Write("  Informe a linha desejada: ");
 
                 linhaEscolhida = int.Parse(Console.ReadLine());
-               
+
                 do      // do-while Novo para não cruzar navios 
                 {
                     if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
@@ -279,17 +279,26 @@ internal class Program
                         Console.WriteLine("  Tecle para continuar....");
                         naoCabe = true;
                         Console.ReadKey();
+                        return;
 
+                    }
+                    if (matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
+                    {
+                        Console.WriteLine("Posição já ocupada, escolha novamente.");
+                        Console.WriteLine("  Tecle para continuar....");
+                        naoCabe = true;
+                        Console.ReadKey();
+                        return;
                     }
                     contadorPosicoesNavio--;
 
-                } while (contadorPosicoesNavio >0 || naoCabe == true);
+                } while (contadorPosicoesNavio > 0 || naoCabe == true);
 
 
-                if (linhaEscolhida<1 || linhaEscolhida>20)
+                if (linhaEscolhida < 1 || linhaEscolhida > 20)
                 {
-                    Console.WriteLine("  Digite APENAS números ente 1 e 20!");
-                    Console.WriteLine("  Tecle para continuar....");
+                    Console.WriteLine(" Digite APENAS números ente 1 e 20!");
+                    Console.WriteLine(" Tecle para continuar...");
                     Console.ReadKey();
                 }
 
@@ -298,10 +307,7 @@ internal class Program
 
 
 
-
             matriz[linhaEscolhida - 1, colun] = 'X';
-
-
 
 
             if (navio.Alinhamento == 'V')
