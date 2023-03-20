@@ -47,18 +47,18 @@ namespace ProjBatalhaNaval
             string aux;
             bool linhaInvalida = true;
 
-            Console.Write("\nJOGADOR " + this.Nome + " INFORME A COLUNA DA POSIÇÃO QUE DESEJA ATIRAR: ");
+            Console.Write("\n\t\tJOGADOR " + this.Nome + " INFORME A COLUNA DA POSIÇÃO QUE DESEJA ATIRAR: ");
             coluna = Console.ReadKey(true).KeyChar;
             colunaAlvo = char.ToUpper(coluna);
             int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
 
             do
             {
-                Console.Write("\nINFORME A LINHA QUE DESEJA ATIRAR: ");
+                Console.Write("\n\t\tINFORME A LINHA QUE DESEJA ATIRAR: ");
 
                 if (!int.TryParse(Console.ReadLine(), out linhaAlvo))
                 {
-                    Console.WriteLine("Informe APENAS numeros, entre 1 e 20!");
+                    Console.WriteLine("\t\tInforme APENAS numeros, entre 1 e 20!");
                     Thread.Sleep(450);
                 }
                 else
@@ -69,7 +69,7 @@ namespace ProjBatalhaNaval
                     }
                     else
                     {
-                        Console.WriteLine("Informe APENAS numeros, entre 1 e 20!");
+                        Console.WriteLine("\t\tInforme APENAS numeros, entre 1 e 20!");
                         Thread.Sleep(450);
                     }
                 }

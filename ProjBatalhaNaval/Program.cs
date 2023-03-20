@@ -55,12 +55,12 @@ internal class Program
                 EscondeNavio(campoJogadorAtual); //tentativaaaaa
                 AlteraOrdemJogador(); // altera o jogador atual pra decrementar a vida ( pq tomou tiro)
                 jogadorAtual.DecrementaVida(); // volta no jogador anterior ( que acertou o tiro)
-                Console.WriteLine(jogadorAtual.Nome + " ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
+                Console.WriteLine("\n\t\t" + jogadorAtual.Nome + "   ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
                 if (jogadorAtual.RetornaVida() == 0)
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
-                    Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
+                    Console.WriteLine($"\n\n\t\tJOGADOR {vencedor} VENCEU O JOGO!!");
                     return;
                 }
                 AlteraOrdemJogador();
@@ -79,12 +79,12 @@ internal class Program
                 EscondeNavio(campoJogadorAtual);
                 AlteraOrdemJogador();
                 jogadorAtual.DecrementaVida();
-                Console.WriteLine(jogadorAtual.Nome + " ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
+                Console.WriteLine("\n\t\t" + jogadorAtual.Nome + "   ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
                 if (jogadorAtual.RetornaVida() == 0)
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
-                    Console.WriteLine($"\n\nJOGADOR {vencedor} VENCEU O JOGO!!");
+                    Console.WriteLine($"\n\n\t\tJOGADOR {vencedor} VENCEU O JOGO!!");
                     return;
                 }
 
