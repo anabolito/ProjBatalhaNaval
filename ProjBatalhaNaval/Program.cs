@@ -153,7 +153,7 @@ internal class Program
 
             Console.WriteLine();
 
-            Console.WriteLine("  JOGADOR " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS.");
+            Console.WriteLine("\n\t\t\t  JOGADOR " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS. \n\n");
 
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao1.Alinhamento = orientacaoJogador;
@@ -193,7 +193,7 @@ internal class Program
             AlteraOrdemJogador(); // ALTERNA PARA JOGADOR 2
             AlteraOrdemCampo(); // ALTERNA  PARA CAMPO2!!
             Console.WriteLine();
-            Console.WriteLine("  JOGADOR: " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS.");
+            Console.WriteLine("\n\t\t\t  JOGADOR: " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS.\n\n");
             MostrarCampoDeBatalha(campoJogadorAtual); // mostra na tela o campo do jogador 2!!
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao2.Alinhamento = orientacaoJogador;

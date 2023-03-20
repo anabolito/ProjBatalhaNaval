@@ -47,7 +47,7 @@ namespace ProjBatalhaNaval
             string aux;
             bool linhaInvalida = true;
 
-            Console.Write("\n\t\tJOGADOR " + this.Nome + " INFORME A COLUNA DA POSIÇÃO QUE DESEJA ATIRAR: ");
+            Console.Write("\n\t\tJOGADOR " + this.Nome + " INFORME A COLUNA DA POSIÇÃO QUE DESEJA ATIRAR:  \n");
             coluna = Console.ReadKey(true).KeyChar;
             colunaAlvo = char.ToUpper(coluna);
             int numeroDaColuna = TransformaLetraDaColunaEmNumero(colunaAlvo);
