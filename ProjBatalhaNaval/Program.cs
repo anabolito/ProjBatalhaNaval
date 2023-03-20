@@ -337,48 +337,55 @@ internal class Program
         void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
         {
 
-            int linhaEscolhida;
+            int linhaEscolhida = 0;
             int contadorPosicoesNavio = navio.Tamanho - 1;
-            bool naoCabe = false;  //new
+            bool naoCabe = false;
+
             do
             {
+
                 Console.Write("  Informe a linha desejada: ");
-                if (!int.TryParse(Console.ReadLine(), out linhaEscolhida) || (linhaEscolhida > 20))
+
+                linhaEscolhida = int.Parse(Console.ReadLine());
+
+                do      // do-while Novo para não cruzar navios 
                 {
-                    Console.Clear();
-                    MostrarCampoDeBatalha(campoJogadorAtual);
-                    Console.WriteLine("Informe APENAS numeros, entre 1 e 20!/nPressione qualquer tecla" +
-                        " para continuar");
-                }
-               
-                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')  //new
+                    if (matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
                     {
-                        Console.WriteLine("Posição inválida, escolha novamente.");
+                        Console.WriteLine("Posição já ocupada, escolha novamente.");
+                        Console.WriteLine("  Tecle para continuar....");
+                        naoCabe = true;
+                        Console.ReadKey();
+                        return;
 
                     }
+                    if (matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
+                    {
+                        Console.WriteLine("Posição já ocupada, escolha novamente.");
+                        Console.WriteLine("  Tecle para continuar....");
+                        naoCabe = true;
+                        Console.ReadKey();
+                        return;
+                    }
+                    contadorPosicoesNavio--;
+
+                } while (contadorPosicoesNavio > 0 || naoCabe == true);
 
 
-                /*if (linhaEscolhida<1 || linhaEscolhida>20)
+                if (linhaEscolhida < 1 || linhaEscolhida > 20)
                 {
-                    Console.WriteLine("  Digite APENAS números ente 1 e 20!");
-                    Console.WriteLine("  Tecle para continuar....");
+                    Console.WriteLine(" Digite APENAS números ente 1 e 20!");
+                    Console.WriteLine(" Tecle para continuar...");
                     Console.ReadKey();
-                    Console.Clear();
-                    MostrarCampoDeBatalha(campoJogadorAtual);
-                }*/
+                }
 
-                /*if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
-                {
-                    Console.Clear();
-                    MostrarCampoDeBatalha(campoJogadorAtual);
-                    Console.WriteLine("  Valor incorreto. Não existe essa linha!");
 
-                }*/
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X' || naoCabe == true);  // naoCabe é novo
 
-            } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X');  // naoCabe é novo
 
 
             matriz[linhaEscolhida - 1, colun] = 'X';
+
 
             if (navio.Alinhamento == 'V')
             {
@@ -399,17 +406,31 @@ internal class Program
                             break;
                         }
                     }
+                    else
+                    {
+
+                    }
+
+
                 } while (contadorPosicoesNavio > 0);
+
+
             }
             contadorPosicoesNavio = navio.Tamanho - 1;
 
             if (navio.Alinhamento == 'H')
             {
+
+
                 do
                 {
+
+
                     //Console.Read(); PROBLEMA DO ERRO NA LINHA ESCOLHIDA 
                     matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
+
+
                 } while (contadorPosicoesNavio > 0);
             }
         }
