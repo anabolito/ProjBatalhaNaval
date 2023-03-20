@@ -52,6 +52,7 @@ internal class Program
 
             while (jogadorAtual.Disparar(campoJogadorAtual)) // INICIALMENTE SERA JOGADOR1 ATIRANDO NO CAMPO2
             {
+                EscondeNavio(campoJogadorAtual); //tentativaaaaa
                 AlteraOrdemJogador(); // altera o jogador atual pra decrementar a vida ( pq tomou tiro)
                 jogadorAtual.DecrementaVida(); // volta no jogador anterior ( que acertou o tiro)
                 Console.WriteLine(jogadorAtual.Nome + " ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
@@ -75,6 +76,7 @@ internal class Program
 
             while (jogadorAtual.Disparar(campoJogadorAtual))
             {
+                EscondeNavio(campoJogadorAtual);
                 AlteraOrdemJogador();
                 jogadorAtual.DecrementaVida();
                 Console.WriteLine(jogadorAtual.Nome + " ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
@@ -92,7 +94,7 @@ internal class Program
 
             AlteraOrdemJogador();
             AlteraOrdemCampo();
-            Console.WriteLine($"\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO" +
+            Console.WriteLine($"\n\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO" +
                 $" CAMPO DO JOGADOR {InformarNomeAdversario()}");
             // MostrarCampoDeBatalha(campoJogadorAtual);    //DESCOMENTR DEPOIS
             EscondeNavio(campoJogadorAtual);

@@ -75,6 +75,8 @@ namespace ProjBatalhaNaval
                 }
             } while (linhaInvalida);
 
+            
+
             if (matriz[(linhaAlvo) - 1, numeroDaColuna] == '@')
             {
                 Console.WriteLine(" VOCÊ JÁ  DISPAROU NESSA COORDENADA ANTERIORMENTE!");
@@ -162,77 +164,77 @@ namespace ProjBatalhaNaval
             return index;
         }
 
-        public void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
-        {
-            int linhaEscolhida;
+        //public void ColocaNavioNaMatriz(char[,] matriz, int colun, Embarcacao navio)
+        //{
+        //    int linhaEscolhida;
 
-            do
-            {
-                Console.WriteLine("\n  Informe a linha desejada: ");
-                while (int.TryParse(Console.ReadLine(), out linhaEscolhida))
-                {
-                    Console.WriteLine($"  Digite APENAS números ente 1 e 20!" +
-                        "  Pressione qualquer tecla para continuar....");
-                    Console.ReadKey();
-                    Console.Clear();
-                    // MostrarCampoDeBatalha(campoJogadorAtual);
-                }
+        //    do
+        //    {
+        //        Console.WriteLine("\n  Informe a linha desejada: ");
+        //        while (int.TryParse(Console.ReadLine(), out linhaEscolhida))
+        //        {
+        //            Console.WriteLine($"  Digite APENAS números ente 1 e 20!" +
+        //                "  Pressione qualquer tecla para continuar....");
+        //            Console.ReadKey();
+        //            Console.Clear();
+        //            // MostrarCampoDeBatalha(campoJogadorAtual);
+        //        }
 
-                if (matriz[linhaEscolhida, colun] == 'X')
-                {
-                    Console.WriteLine("  Posição já preenchida. Escolha outra posição!");
-                }
-                else if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
-                {
-                    Console.Clear();
-                    // MostrarCampoDeBatalha(campoJogadorAtual);
-                    Console.WriteLine("  Valor incorreto. Não existe essa linha!");
-                }
+        //        if (matriz[linhaEscolhida, colun] == 'X')
+        //        {
+        //            Console.WriteLine("  Posição já preenchida. Escolha outra posição!");
+        //        }
+        //        else if ((linhaEscolhida <= 0) || (linhaEscolhida > matriz.GetLength(0)))
+        //        {
+        //            Console.Clear();
+        //            // MostrarCampoDeBatalha(campoJogadorAtual);
+        //            Console.WriteLine("  Valor incorreto. Não existe essa linha!");
+        //        }
 
-            } while ((linhaEscolhida <= 0)
-                     || (linhaEscolhida > matriz.GetLength(0))
-                     || matriz[linhaEscolhida, colun] == 'X');
+        //    } while ((linhaEscolhida <= 0)
+        //             || (linhaEscolhida > matriz.GetLength(0))
+        //             || matriz[linhaEscolhida, colun] == 'X');
 
-            matriz[linhaEscolhida - 1, colun] = 'X';
+        //    matriz[linhaEscolhida - 1, colun] = 'X';
 
-            int contadorPosicoesNavio = navio.Tamanho - 1;
+        //    int contadorPosicoesNavio = navio.Tamanho - 1;
 
-            if (navio.Alinhamento == 'V')
-            {
-                contadorPosicoesNavio = navio.Tamanho - 1;
+        //    if (navio.Alinhamento == 'V')
+        //    {
+        //        contadorPosicoesNavio = navio.Tamanho - 1;
 
-                do
-                {
-                    if (((linhaEscolhida - 1) + contadorPosicoesNavio) <= matriz.GetLength(0))
-                    {
-                        if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] == '~')
-                        {
-                            matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] = 'X';
-                            contadorPosicoesNavio--;
-                        }
-                        else
-                        {
-                            Console.WriteLine("  Escolha outra posição!");
-                            break;
-                        }
-                    }
-                    else { }
+        //        do
+        //        {
+        //            if (((linhaEscolhida - 1) + contadorPosicoesNavio) <= matriz.GetLength(0))
+        //            {
+        //                if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] == '~')
+        //                {
+        //                    matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] = 'X';
+        //                    contadorPosicoesNavio--;
+        //                }
+        //                else
+        //                {
+        //                    Console.WriteLine("  Escolha outra posição!");
+        //                    break;
+        //                }
+        //            }
+        //            else { }
 
 
-                } while (contadorPosicoesNavio > 0);
-            }
-            contadorPosicoesNavio = navio.Tamanho - 1;
+        //        } while (contadorPosicoesNavio > 0);
+        //    }
+        //    contadorPosicoesNavio = navio.Tamanho - 1;
 
-            if (navio.Alinhamento == 'H')
-            {
-                do
-                {
-                    Console.Read();
-                    matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
-                    contadorPosicoesNavio--;
+        //    if (navio.Alinhamento == 'H')
+        //    {
+        //        do
+        //        {
+        //            Console.Read();
+        //            matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
+        //            contadorPosicoesNavio--;
 
-                } while (contadorPosicoesNavio > 0);
-            }
-        }
+        //        } while (contadorPosicoesNavio > 0);
+        //    }
+        //}
     }
 }
