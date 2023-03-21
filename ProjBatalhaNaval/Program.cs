@@ -401,14 +401,6 @@ internal class Program
                 } while ( (contadorPosicoesNavio > 0) || naoCabe == true);
 
 
-                if (linhaEscolhida < 1 || linhaEscolhida > 20)
-                {
-                    Console.WriteLine(" Digite APENAS números ente 1 e 20!");
-                    Console.WriteLine(" Tecle para continuar...");
-                    Console.ReadKey();
-                }
-
-
             } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X' || naoCabe == true);
 
 
@@ -456,7 +448,8 @@ internal class Program
             }
             if(deuCerto)
                 return true;
-            else return false;
+            else 
+                return false;
         }
 
         void PreenchimentoInicialCampo(char[,] matriz)
@@ -470,28 +463,7 @@ internal class Program
             }
         }
 
-        void ExibeMatrizPreenchida(char[,] matriz)
-        {
-            Console.Write("        A   B   C   D   E   F   G   H   I   " +
-                "J   K   L   M   N   O   P   Q   R   S   T /n");
-            int contador = 1;
-
-            for (int linha = 1; linha <= 20; linha++)
-            {
-                Console.Write("  " + contador.ToString("d2") + " ");
-                for (int coluna = 1; coluna <= 20; coluna++)
-                {
-
-                    Console.Write(" |_" + matriz[linha - 1, coluna - 1] + "_");
-                    if (coluna == 20)
-                    {
-                        Console.Write(" |");
-                        Console.WriteLine();
-                        contador++;
-                    }
-                }
-            }
-        }
+        
 
 
     }
