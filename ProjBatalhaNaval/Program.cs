@@ -100,14 +100,7 @@ internal class Program
             
             EscondeNavio(campoJogadorAtual);
 
-
-
-
         } while (vencedor == null);
-
-
-
-
 
         string InformarNomeAdversario()
         {
@@ -142,11 +135,6 @@ internal class Program
                 campoJogadorAtual = campo1;
             }
         }
-
-
-
-
-
 
         void InserirNaviosPorJogador()
         {
@@ -247,7 +235,6 @@ internal class Program
             }
             retorno = false;
 
-
             Console.Clear();
 
             MostrarCampoDeBatalha(campoJogadorAtual);
@@ -256,7 +243,6 @@ internal class Program
 
             AlteraOrdemJogador();
         }
-
 
         void MostrarCampoDeBatalha(char[,] matriz)
         {
@@ -268,9 +254,7 @@ internal class Program
             int contador = 1;
 
             for (int linha = 1; linha <= 20; linha++)
-            {
-
-                
+            {        
                 Console.Write("  " + contador.ToString("d2") + " ");
                 for (int coluna = 1; coluna <= 20; coluna++)
                 {
@@ -288,9 +272,6 @@ internal class Program
             Console.ResetColor();
 
         }
-
-
-
 
         void EscondeNavio(char[,] matriz)
         {
@@ -328,9 +309,6 @@ internal class Program
             Console.ResetColor();
 
         }
-
-
-
        
         int TransformaLetraDaColunaEmNumero()
         {
@@ -375,19 +353,25 @@ internal class Program
             {
 
                 Console.Write("  Informe a linha desejada: ");
-
-                while (!int.TryParse(Console.ReadLine(), out linhaEscolhida))
+                bool valida = true;
+                while (valida)
                 {
-                    Console.Write("  Informe a linha desejada novamente: ");
+                    if (!int.TryParse(Console.ReadLine(), out linhaEscolhida))
+                    {
+                        Console.WriteLine("Por favor digite um número válido!\n");
+                    }
+                    else
+                    {
+                        if (linhaEscolhida > 0 && linhaEscolhida < 21)
+                        {
+                            valida = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("O número deve estar entre 1 a 20\n");
+                        }
+                    }
                 }
-
-                while( linhaEscolhida > 20 || linhaEscolhida <=0)
-                {
-                    Console.Write("  Informe a linha desejada entre 1 e 20: ");
-                    linhaEscolhida = int.Parse(Console.ReadLine());
-                }
-               
-
 
                 do   
                 {
@@ -452,11 +436,6 @@ internal class Program
                             break;
                         }
                     }
-                    else
-                    {
-
-                    }
-
 
                 } while (contadorPosicoesNavio > 0);
                 deuCerto = true;
@@ -466,7 +445,6 @@ internal class Program
 
             if (navio.Alinhamento == 'H')
             {
-
 
                 do
                 {

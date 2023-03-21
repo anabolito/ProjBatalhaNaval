@@ -14,11 +14,11 @@ namespace ProjBatalhaNaval
         private static int numeroDoJogador = 0;
 
         public string Nome { get; set; }
-        public int contadorDeVida { get; set; }
+        public int ContadorDeVida { get; set; }
 
         public Jogador()
         {
-            contadorDeVida = 9;  
+            ContadorDeVida = 9;  
             this.Nome = "PLAYER " + numeroDoJogador;
             numeroDoJogador++;
             Console.WriteLine();
@@ -31,12 +31,12 @@ namespace ProjBatalhaNaval
 
         public void DecrementaVida()
         {
-            contadorDeVida--;
+            ContadorDeVida--;
         }
 
         public int RetornaVida()
         {
-            return this.contadorDeVida;
+            return this.ContadorDeVida;
         }
 
         public bool Disparar(char[,] matriz)

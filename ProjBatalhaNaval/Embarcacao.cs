@@ -13,7 +13,7 @@ namespace ProjBatalhaNaval
 
         public string Nome { get; set; }
 
-        public int contadorVida { get; set; }
+        public int ContadorVida { get; set; }
 
         public Jogador Piloto { get; set; } 
 
