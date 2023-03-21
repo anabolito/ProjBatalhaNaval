@@ -393,23 +393,55 @@ internal class Program
                 {
                     naoCabe = false;
 
+                    if( (linhaEscolhida-1) + contadorPosicoesNavio > 19)
+                    {
+                        naoCabe = true;
+                        break;
+                    }
+                    if( (colun + contadorPosicoesNavio) > 19)
+                    {
+                        naoCabe = true;
+                        break;
+                    }
+
                     if (navio.Alinhamento =='V' && matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
                     {
                         Console.WriteLine("  Posição já ocupada, escolha novamente.");
-                        contadorPosicoesNavio++;
+                       // contadorPosicoesNavio++;
                         naoCabe = true;
                         Console.WriteLine(contadorPosicoesNavio);
                        
                        break; 
                     }
-                    if (navio.Alinhamento == 'H' && matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
+                    if (navio.Alinhamento == 'V' && matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] >=matriz.GetLength(0))
                     {
                         Console.WriteLine("  Posição já ocupada, escolha novamente.");
+                        //contadorPosicoesNavio++;
+                        naoCabe = true;
+                        Console.WriteLine(contadorPosicoesNavio);
+
+                        break;
+                    }
+
+                    if (navio.Alinhamento == 'H' && matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
+                    {
+                        Console.WriteLine(" Escolha outra posição.");
                         Console.WriteLine("  Tecle para continuar....");
-                        contadorPosicoesNavio++;
+                        //contadorPosicoesNavio++;
                         naoCabe = true;
                         Console.WriteLine(contadorPosicoesNavio);
                                              
+                        break;
+                    }
+
+                    if (navio.Alinhamento == 'H' && matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] >= matriz.GetLength(1))
+                    {
+                        Console.WriteLine("Escolha outra posição.");
+                        Console.WriteLine("  Tecle para continuar....");
+                       // contadorPosicoesNavio++;
+                        naoCabe = true;
+                        Console.WriteLine(contadorPosicoesNavio);
+
                         break;
                     }
                     contadorPosicoesNavio--;
@@ -417,11 +449,20 @@ internal class Program
                 } while ( (contadorPosicoesNavio > 0) || naoCabe == true);
 
 
-                if (linhaEscolhida < 1 || linhaEscolhida > 20)
+                if (linhaEscolhida < 1 )
                 {
                     Console.WriteLine(" Digite APENAS números ente 1 e 20!");
                     Console.WriteLine(" Tecle para continuar...");
-                    Console.ReadKey();
+                    // Console.ReadKey();
+                    break;
+                }
+
+                if (linhaEscolhida >= 20)
+                {
+                    Console.WriteLine(" Digite APENAS números ente 1 e 20!");
+                    Console.WriteLine(" Tecle para continuar...");
+                    //Console.ReadKey();
+                    break;
                 }
 
 
@@ -437,7 +478,7 @@ internal class Program
 
                 do
                 {
-                    if (((linhaEscolhida - 1) + contadorPosicoesNavio) <= matriz.GetLength(0))
+                    if (((linhaEscolhida - 1) + contadorPosicoesNavio) < matriz.GetLength(0))
                     {
                         if (matriz[(linhaEscolhida - 1) + contadorPosicoesNavio, colun] == '~')
                         {
@@ -469,7 +510,7 @@ internal class Program
 
 
                 do
-                {
+                {   if(colun + contadorPosicoesNavio < matriz.GetLength(1)) 
                     matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
                     deuCerto = true;
