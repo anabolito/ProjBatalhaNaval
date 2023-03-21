@@ -59,7 +59,7 @@ namespace ProjBatalhaNaval
                 if (!int.TryParse(Console.ReadLine(), out linhaAlvo))
                 {
                     Console.WriteLine("\n  Informe APENAS números, entre 1 e 20!");
-                    Thread.Sleep(450);
+                    Thread.Sleep(2000);
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace ProjBatalhaNaval
                     else
                     {
                         Console.WriteLine("\n  Informe APENAS números, entre 1 e 20!");
-                        Thread.Sleep(450);
+                        Thread.Sleep(2000);
                     }
                 }
             } while (linhaInvalida);
@@ -80,6 +80,7 @@ namespace ProjBatalhaNaval
             if (matriz[(linhaAlvo) - 1, numeroDaColuna] == '@')
             {
                 Console.WriteLine("  VOCÊ JÁ  DISPAROU NESSA COORDENADA ANTERIORMENTE!");
+                Thread.Sleep(2000);
                 return false;
             }
 
@@ -87,12 +88,14 @@ namespace ProjBatalhaNaval
             {
                 Console.WriteLine("\n  Você acertou 1 posição!");
                 matriz[(linhaAlvo) - 1, numeroDaColuna] = '@';
+                Thread.Sleep(2000);
                 return true;
             }
             else
             {
                 matriz[(linhaAlvo) - 1, numeroDaColuna] = 'A';
                 Console.WriteLine("\n  Você errou o alvo!  DEU ÁGUA!!!");
+                Thread.Sleep(2000);
             }
             return false;
         }
