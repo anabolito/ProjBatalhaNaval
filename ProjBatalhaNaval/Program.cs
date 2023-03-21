@@ -27,8 +27,8 @@ internal class Program
         Jogador jogador1 = new();
         Jogador jogador2 = new();
 
-        jogadorAtual = jogador1;         // JOGADORATUAL COMEÇA COMO JOGADOR1
-        campoJogadorAtual = campo1; //  define valor inicial do jogadorAtual
+        jogadorAtual = jogador1;
+        campoJogadorAtual = campo1;
 
         // -- CRIAÇÃO DAS EMBARCAÇÕES--
         PortaAvioes portaAviao1 = new();
@@ -43,25 +43,25 @@ internal class Program
         Embarcacao embarcacaoAtual = submarino1;
 
         InserirNaviosPorJogador();
-        EscondeNavio(campoJogadorAtual);    /// TENTTIVA MATRIZ Q ESCONDE
+        EscondeNavio(campoJogadorAtual);
 
-        //COMECA COM JOGADOR 1 ATIRANDO NO CAMPO 2!!!!
+       
         do
         {
-            Console.WriteLine($"\n\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
+            Console.WriteLine($"\n  {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
                 $" DO JOGADOR {InformarNomeAdversario()}");
 
-            while (jogadorAtual.Disparar(campoJogadorAtual)) // INICIALMENTE SERA JOGADOR1 ATIRANDO NO CAMPO2
+            while (jogadorAtual.Disparar(campoJogadorAtual))
             {
-                EscondeNavio(campoJogadorAtual); //tentativaaaaa
-                AlteraOrdemJogador(); // altera o jogador atual pra decrementar a vida ( pq tomou tiro)
-                jogadorAtual.DecrementaVida(); // volta no jogador anterior ( que acertou o tiro)
-                Console.WriteLine("\n\t\t" + jogadorAtual.Nome + "   ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
+                EscondeNavio(campoJogadorAtual);
+                AlteraOrdemJogador();
+                jogadorAtual.DecrementaVida();
+                Console.WriteLine("\n  " + jogadorAtual.Nome + "   ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
                 if (jogadorAtual.RetornaVida() == 0)
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
-                    Console.WriteLine($"\n\n\t\tJOGADOR {vencedor} VENCEU O JOGO!!");
+                    Console.WriteLine($"\n  ***JOGADOR {vencedor} VENCEU O JOGO!!***");
                     return;
                 }
                 AlteraOrdemJogador();
@@ -70,9 +70,9 @@ internal class Program
 
             AlteraOrdemJogador();
             AlteraOrdemCampo();
-            Console.WriteLine($"\n\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
+            Console.WriteLine($"\n  {jogadorAtual.Nome} ESTÁ DISPARANDO NO CAMPO" +
                 $" DO JOGADOR {InformarNomeAdversario()}");
-            // MostrarCampoDeBatalha(campoJogadorAtual); //DESCOMENTAR DEPOIS
+           
             EscondeNavio(campoJogadorAtual);
 
             while (jogadorAtual.Disparar(campoJogadorAtual))
@@ -80,12 +80,12 @@ internal class Program
                 EscondeNavio(campoJogadorAtual);
                 AlteraOrdemJogador();
                 jogadorAtual.DecrementaVida();
-                Console.WriteLine("\n\t\t" + jogadorAtual.Nome + "   ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
+                Console.WriteLine("\n  " + jogadorAtual.Nome + "   ---> VIDAS RESTANTES: " + jogadorAtual.RetornaVida());
                 if (jogadorAtual.RetornaVida() == 0)
                 {
                     AlteraOrdemJogador();
                     vencedor = jogadorAtual.Nome;
-                    Console.WriteLine($"\n\n\t\tJOGADOR {vencedor} VENCEU O JOGO!!");
+                    Console.WriteLine($"\n  ***JOGADOR {vencedor} VENCEU O JOGO!!***");
                     return;
                 }
 
@@ -95,9 +95,9 @@ internal class Program
 
             AlteraOrdemJogador();
             AlteraOrdemCampo();
-            Console.WriteLine($"\n\t\t {jogadorAtual.Nome} ESTÁ DISPARANDO NO" +
+            Console.WriteLine($"\n  {jogadorAtual.Nome} ESTÁ DISPARANDO NO" +
                 $" CAMPO DO JOGADOR {InformarNomeAdversario()}");
-            // MostrarCampoDeBatalha(campoJogadorAtual);    //DESCOMENTR DEPOIS
+            
             EscondeNavio(campoJogadorAtual);
 
 
@@ -154,7 +154,7 @@ internal class Program
 
             Console.WriteLine();
 
-            Console.WriteLine("\n\t\t\t\t  JOGADOR " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS. \n\n");
+            Console.WriteLine("\n  JOGADOR " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS. \n\n");
 
             char orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao1.Alinhamento = orientacaoJogador;
@@ -165,7 +165,7 @@ internal class Program
 
             Console.Clear();
 
-            MostrarCampoDeBatalha(campoJogadorAtual); // mostra na tela o campo do jogador 1
+            MostrarCampoDeBatalha(campoJogadorAtual); 
 
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             
@@ -174,14 +174,14 @@ internal class Program
 
             colunaCampo = TransformaLetraDaColunaEmNumero();
             
-            bool retorno = false; // teste
+            bool retorno = false;
 
             while (retorno == false)
             {
                 retorno = ColocaNavioNaMatriz(campoJogadorAtual, colunaCampo, submarino1);
 
             }
-            retorno = false;  // retornando o false p n pular o destroyer
+            retorno = false; 
 
             Console.Clear();
 
@@ -208,11 +208,11 @@ internal class Program
 
             //------------ COLONA NAVIOS JOGADOR 2---------------------------//
 
-            AlteraOrdemJogador(); // ALTERNA PARA JOGADOR 2
-            AlteraOrdemCampo(); // ALTERNA  PARA CAMPO2!!
+            AlteraOrdemJogador();
+            AlteraOrdemCampo(); 
             Console.WriteLine();
-            Console.WriteLine("\n\t\t\t\t  JOGADOR: " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS.\n\n");
-            MostrarCampoDeBatalha(campoJogadorAtual); // mostra na tela o campo do jogador 2!!
+            Console.WriteLine("\n  JOGADOR: " + jogadorAtual.Nome + ", " + "INFORME AS COORDENADAS DESEJADAS.\n\n");
+            MostrarCampoDeBatalha(campoJogadorAtual);
             orientacaoJogador = jogadorAtual.RetornarOrientacao();
             portaAviao2.Alinhamento = orientacaoJogador;
 
@@ -254,7 +254,7 @@ internal class Program
             Console.WriteLine("Aguarde um momento...");
             Thread.Sleep(2000);
 
-            AlteraOrdemJogador(); // altera para jogador 1 apos o jogador 2 colocar seus navios
+            AlteraOrdemJogador();
         }
 
 
@@ -270,7 +270,7 @@ internal class Program
             for (int linha = 1; linha <= 20; linha++)
             {
 
-                //contador++;
+                
                 Console.Write("  " + contador.ToString("d2") + " ");
                 for (int coluna = 1; coluna <= 20; coluna++)
                 {
@@ -290,12 +290,11 @@ internal class Program
         }
 
 
-        //**********************************************************************
 
 
         void EscondeNavio(char[,] matriz)
         {
-            Console.Clear(); // ADICCIONEI
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
 
             Console.Write("        A    B    C    D    E    F    G    H" +
@@ -305,7 +304,7 @@ internal class Program
             for (int linha = 1; linha <= 20; linha++)
             {
 
-                //contador++;
+                
                 Console.Write("  " + contador.ToString("d2") + " ");
                 for (int coluna = 1; coluna <= 20; coluna++)
                 {
@@ -332,7 +331,7 @@ internal class Program
 
 
 
-        //*********************************************************************
+       
         int TransformaLetraDaColunaEmNumero()
         {
             char colunaDesejada;
@@ -387,16 +386,16 @@ internal class Program
                     Console.Write("  Informe a linha desejada entre 1 e 20: ");
                     linhaEscolhida = int.Parse(Console.ReadLine());
                 }
-                //while (matriz[linhaEscolhida - 1, colun])
+               
 
 
-                do      // do-while para não cruzar navios 
+                do   
                 {
                     naoCabe = false;
 
                     if (navio.Alinhamento =='V' && matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X')
                     {
-                        Console.WriteLine("Posição já ocupada, escolha novamente.");
+                        Console.WriteLine("  Posição já ocupada, escolha novamente.");
                         contadorPosicoesNavio++;
                         naoCabe = true;
                         Console.WriteLine(contadorPosicoesNavio);
@@ -405,14 +404,12 @@ internal class Program
                     }
                     if (navio.Alinhamento == 'H' && matriz[linhaEscolhida - 1, colun + contadorPosicoesNavio] == 'X')
                     {
-                        Console.WriteLine("Posição já ocupada, escolha novamente.");
+                        Console.WriteLine("  Posição já ocupada, escolha novamente.");
                         Console.WriteLine("  Tecle para continuar....");
                         contadorPosicoesNavio++;
                         naoCabe = true;
                         Console.WriteLine(contadorPosicoesNavio);
-                        
-                        //Console.ReadKey();
-                        
+                                             
                         break;
                     }
                     contadorPosicoesNavio--;
@@ -428,7 +425,7 @@ internal class Program
                 }
 
 
-            } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X' || naoCabe == true);  // naoCabe é novo
+            } while ((linhaEscolhida <= 0) || (linhaEscolhida > 20) || matriz[linhaEscolhida - 1 + contadorPosicoesNavio, colun] == 'X' || naoCabe == true);
 
 
             matriz[linhaEscolhida - 1, colun] = 'X';
@@ -450,7 +447,7 @@ internal class Program
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("  Escolha outra posicao!");
+                            Console.WriteLine("  Escolha outra posição!");
                             Console.ResetColor();
                             break;
                         }
@@ -473,9 +470,6 @@ internal class Program
 
                 do
                 {
-
-
-                    //Console.Read(); PROBLEMA DO ERRO NA LINHA ESCOLHIDA 
                     matriz[(linhaEscolhida - 1), colun + contadorPosicoesNavio] = 'X';
                     contadorPosicoesNavio--;
                     deuCerto = true;
